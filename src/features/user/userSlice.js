@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchCount } from "../counter/counterAPI";
 
 const initialState = {
-    currentUser: null,
-    status: "logged out",
-    spotifyToken: "testing",
+    googleUser: null,
+    siteUser: null,
+    handle: "Jeff",
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -23,11 +23,15 @@ export const userSlice = createSlice({
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
-        updateCurrentUser: (state, action) => {
-            state.currentUser = action.payload;
+        updateGoogleUser: (state, action) => {
+            state.googleUser = action.payload;
         },
-        updateSpotifyToken: (state, action) => {
-            state.spotifyToken = action.payload;
+        updateSiteUser: (state, action) => {
+            state.siteUser = action.payload;
+        },
+
+        updateHandle: (state, action) => {
+            state.handle = action.payload;
         },
     },
     // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -45,8 +49,9 @@ export const userSlice = createSlice({
 });
 
 export const {
-    updateCurrentUser,
-    updateSpotifyToken,
+    updateGoogleUser,
+    updatesiteUser,
+    updateHandle,
     increment,
     decrement,
     incrementByAmount,
@@ -55,13 +60,14 @@ export const {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectUser = (state) => state.user.currentUser;
-export const selectSpotifyToken = (state) => state.user.spotifyToken;
+export const selectGoogleUser = (state) => state.user.googleUser;
+export const selectSiteUser = (state) => state.user.siteUser;
+export const selectHandle = (state) => state.user.handle;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 export const incrementIfOdd = (amount) => (dispatch, getState) => {
-    const currentValue = selectUser(getState());
+    const currentValue = selectGoogleUser(getState());
     if (currentValue % 2 === 1) {
         dispatch(incrementByAmount(amount));
     }

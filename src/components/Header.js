@@ -12,14 +12,13 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Profile from "../components/Profile.js";
 
-import logo from "../assets/images/kdaus.png";
-
-const pages = ["One", "Two", "Three"];
+const pages = ["Forums", "Two", "Three"];
 
 const Header = () => {
+    const location = useLocation();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
@@ -31,7 +30,7 @@ const Header = () => {
     };
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: "white" }}>
+        <AppBar position="static" sx={{ backgroundColor: "var(--bg-header)" }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box
@@ -40,17 +39,9 @@ const Header = () => {
                                 xs: "none",
                                 md: "flex",
                             },
-                            maxWidth: "10rem",
-                            padding: "1rem 0",
                         }}
                     >
-                        <a href="https://kennedysdisease.org">
-                            <img
-                                src={logo}
-                                alt="KDA Logo"
-                                style={{ width: "100%", height: "auto" }}
-                            />
-                        </a>
+                        <Typography>LOGO</Typography>
                     </Box>
 
                     <Box
@@ -94,7 +85,7 @@ const Header = () => {
                                     <Link to={page.toLowerCase()}>
                                         <Typography
                                             textAlign="center"
-                                            sx={{ color: "var(--fc-primary)" }}
+                                            sx={{ color: "var(--fc-light)" }}
                                         >
                                             {page}
                                         </Typography>
@@ -110,19 +101,10 @@ const Header = () => {
                                 xs: "flex",
                                 md: "none",
                             },
-                            maxWidth: "10rem",
-                            padding: "1rem 0",
                             margin: "0 auto",
                         }}
                     >
-                        <img
-                            src={logo}
-                            alt="KDA Logo"
-                            style={{
-                                width: "100%",
-                                height: "auto",
-                            }}
-                        />
+                        <Typography>LOGO</Typography>
                     </Box>
                     <Box
                         sx={{
@@ -139,8 +121,15 @@ const Header = () => {
                                     onClick={handleCloseNavMenu}
                                     sx={{
                                         my: 2,
-                                        color: "var(--fc-primary)",
+                                        color:
+                                            location.pathname ===
+                                            `/${page.toLowerCase()}`
+                                                ? "white"
+                                                : "var(--fc-light)",
                                         display: "block",
+                                        "&:hover": {
+                                            color: "white",
+                                        },
                                     }}
                                 >
                                     {page}

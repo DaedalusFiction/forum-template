@@ -8,12 +8,12 @@ import {
     setPersistence,
 } from "firebase/auth";
 const firebaseConfig = {
-    apiKey: "AIzaSyBK3r3jnes_awgfFdqJzofbUMh5Sj2K08s",
-    authDomain: "treble-92324.firebaseapp.com",
-    projectId: "treble-92324",
-    storageBucket: "treble-92324.appspot.com",
-    messagingSenderId: "435246677482",
-    appId: "1:435246677482:web:8adbdefd95f6529e288693",
+    apiKey: "AIzaSyDQsze56WKgrj5J5OUyBQ2yHup9Jdyj3u8",
+    authDomain: "forum-template-1166f.firebaseapp.com",
+    projectId: "forum-template-1166f",
+    storageBucket: "forum-template-1166f.appspot.com",
+    messagingSenderId: "209208640806",
+    appId: "1:209208640806:web:4dfaee0f0d4ea4cb6f2de7",
 };
 
 const app = initializeApp(firebaseConfig);

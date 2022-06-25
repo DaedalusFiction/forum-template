@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import Layout from "./routes/Layout";
 import Home from "./routes/Home";
 import Nopage from "./routes/Nopage";
+import Forums from "./routes/Forums";
 
 const theme = createTheme({
     palette: {
@@ -24,6 +25,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
+                        <Route path="forums" element={<Forums />} />
 
                         <Route path="*" element={<Nopage />} />
                     </Route>

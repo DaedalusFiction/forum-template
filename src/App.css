@@ -5,6 +5,11 @@
     padding: 0;
 }
 
+:root {
+    --bg-header: rgb(255, 64, 0);
+    --fc-light: rgb(233, 233, 233);
+}
+
 a {
     text-decoration: none;
 }

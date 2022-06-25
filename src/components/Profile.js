@@ -9,9 +9,10 @@ import {
     selectCount,
 } from "../features/counter/counterSlice";
 import {
-    updateCurrentUser,
-    selectUser,
-    selectSpotifyToken,
+    updateGoogleUser,
+    selectGoogleUser,
+    selectSiteUser,
+    selectHandle,
 } from "../features/user/userSlice";
 import {
     Avatar,
@@ -34,37 +35,31 @@ import { auth, provider } from "../firebase";
 const settings = ["Settings", "Logout"];
 
 const Profile = () => {
-    const [currentUser, setCurrentUser] = useState(null);
-    const count = useSelector(selectCount);
-    const user = useSelector(selectUser);
-    const spotifyToken = useSelector(selectSpotifyToken);
+    const googleUser = useSelector(selectGoogleUser);
+    const siteUser = useSelector(selectSiteUser);
+    const handle = useSelector(selectHandle);
     const dispatch = useDispatch();
-    const [incrementAmount, setIncrementAmount] = useState("2");
-
-    const incrementValue = Number(incrementAmount) || 0;
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    useEffect(() => {
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                const uid = user.uid;
-                setCurrentUser(user);
-                // ...
-            } else {
-                // User is signed out
-                // ...
-            }
-        });
-        return () => {};
-    }, []);
+    // useEffect(() => {
+    //     const auth = getAuth();
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             // User is signed in, see docs for a list of available properties
+    //             // https://firebase.google.com/docs/reference/js/firebase.User
+    //             const uid = user.uid;
+    //             // ...
+    //         } else {
+    //             // User is signed out
+    //             // ...
+    //         }
+    //     });
+    //     return () => {};
+    // }, []);
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
-        // console.log(user);
     };
 
     const handleCloseUserMenu = () => {
@@ -74,11 +69,39 @@ const Profile = () => {
     const handleMenuClick = (e) => {
         switch (e.target.innerHTML) {
             case "Settings":
-                console.log(spotifyToken);
                 setAnchorElUser(null);
                 break;
-            case "Logout":
-                auth.signOut().then(dispatch(updateCurrentUser(null)));
+            case "Log In":
+                signInWithPopup(auth, provider)
+                    .then((result) => {
+                        // This gives you a Google Access Token. You can use it to access the Google API.
+                        const credential =
+                            GoogleAuthProvider.credentialFromResult(result);
+                        const token = credential.accessToken;
+                        // The signed-in user info.
+                        const googleUser = {
+                            id: result.user.uid,
+                            name: result.user.displayName,
+                            photoURL: result.user.photoURL,
+                        };
+                        dispatch(updateGoogleUser(googleUser));
+                        // ...
+                    })
+                    .catch((error) => {
+                        // Handle Errors here.
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        // The email of the user's account used.
+                        const email = error.customData.email;
+                        // The AuthCredential type that was used.
+                        const credential =
+                            GoogleAuthProvider.credentialFromError(error);
+                        // ...
+                    });
+                setAnchorElUser(null);
+                break;
+            case "Log Out":
+                auth.signOut().then(dispatch(updateGoogleUser(null)));
                 setAnchorElUser(null);
                 break;
             default:
@@ -90,12 +113,7 @@ const Profile = () => {
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                        alt={user ? user.name : ""}
-                        src={
-                            user ? user.photoURL : "/static/images/avatar/2.jpg"
-                        }
-                    />
+                    <Avatar>{handle.charAt(0)}</Avatar>
                 </IconButton>
             </Tooltip>
             <Menu
@@ -114,11 +132,21 @@ const Profile = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
-                {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleMenuClick}>
-                        <Typography textAlign="center">{setting}</Typography>
+                {!googleUser && (
+                    <MenuItem onClick={handleMenuClick}>
+                        <Typography textAlign="center">Log In</Typography>
                     </MenuItem>
-                ))}
+                )}
+                {googleUser && (
+                    <MenuItem onClick={handleMenuClick}>
+                        <Typography textAlign="center">Settings</Typography>
+                    </MenuItem>
+                )}
+                {googleUser && (
+                    <MenuItem onClick={handleMenuClick}>
+                        <Typography textAlign="center">Log Out</Typography>
+                    </MenuItem>
+                )}
             </Menu>
         </Box>
     );
