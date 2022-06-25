@@ -28,7 +28,7 @@ const Footer = () => {
                     sx={{
                         display: "flex",
                         justifyContent: "space-between",
-                        alignItems: "end",
+                        alignItems: "start",
                     }}
                 >
                     <Box>
@@ -49,6 +49,7 @@ const Footer = () => {
                                     <Typography
                                         sx={{
                                             color: "var(--fc-light)",
+                                            fontSize: ".8rem",
                                             "&:hover": { color: "white" },
                                         }}
                                         gutterBottom
@@ -65,6 +66,23 @@ const Footer = () => {
                         </Button>
                     </Link>
                 </Box>
+                <Typography
+                    sx={{
+                        fontSize: ".8rem",
+                        color: "white",
+                        textAlign: "center",
+                    }}
+                >
+                    Website created by{" "}
+                    <a
+                        href="https://davidjsorensen.com"
+                        target="_BLANK"
+                        rel="noreferrer"
+                        style={{ color: "white", textDecoration: "underline" }}
+                    >
+                        David J. Sorensen
+                    </a>
+                </Typography>
             </Container>
         </Box>
     );
