@@ -6,7 +6,8 @@
 }
 
 :root {
-    --bg-header: rgb(255, 64, 0);
+    --bg-accent: rgb(255, 64, 0);
+    --fc-primary: rgb(30, 30, 30);
     --fc-light: rgb(233, 233, 233);
 }
 

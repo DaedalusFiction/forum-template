@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     const links = [
         {
-            text: "FDA's PFDD Information",
-            href: "https://www.fda.gov/drugs/development-approval-process-drugs/cder-patient-focused-drug-development",
+            text: "Link One",
+            href: "https://davidjsorensen.com",
         },
         {
-            text: "Kennedy's Disease Association",
-            href: "https://kennedysdisease.org",
+            text: "Link Two",
+            href: "https://davidjsorensen.com",
         },
     ];
     const navigateToTop = () => {
@@ -36,7 +36,7 @@ const Footer = () => {
                             variant="h6"
                             sx={{ color: "white", marginBottom: "1em" }}
                         >
-                            Kennedy's Disease Association 2022 PFDD
+                            Forum Website
                         </Typography>
                         {links.map((item, index) => {
                             return (
@@ -47,7 +47,10 @@ const Footer = () => {
                                     rel="noreferrer"
                                 >
                                     <Typography
-                                        sx={{ color: "var(--fc-gray-200)" }}
+                                        sx={{
+                                            color: "var(--fc-light)",
+                                            "&:hover": { color: "white" },
+                                        }}
                                         gutterBottom
                                     >
                                         {item.text}

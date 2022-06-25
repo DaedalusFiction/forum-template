@@ -30,7 +30,7 @@ const Header = () => {
     };
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: "var(--bg-header)" }}>
+        <AppBar position="static" sx={{ backgroundColor: "var(--bg-accent)" }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box
@@ -55,7 +55,7 @@ const Header = () => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
-                            sx={{ color: "var(--fc-primary)" }}
+                            sx={{ color: "var(--fc-light)" }}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -85,7 +85,7 @@ const Header = () => {
                                     <Link to={page.toLowerCase()}>
                                         <Typography
                                             textAlign="center"
-                                            sx={{ color: "var(--fc-light)" }}
+                                            sx={{ color: "var(--fc-primary)" }}
                                         >
                                             {page}
                                         </Typography>
