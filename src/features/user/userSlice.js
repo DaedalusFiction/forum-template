@@ -50,7 +50,7 @@ export const userSlice = createSlice({
 
 export const {
     updateGoogleUser,
-    updatesiteUser,
+    updateSiteUser,
     updateHandle,
     increment,
     decrement,

@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    decrement,
-    increment,
-    incrementByAmount,
-    incrementAsync,
-    incrementIfOdd,
-    selectCount,
-} from "../features/counter/counterSlice";
+import { collection, addDoc, doc, setDoc, getDoc } from "firebase/firestore";
+
 import {
     updateGoogleUser,
     selectGoogleUser,
     selectSiteUser,
     selectHandle,
+    updateSiteUser,
 } from "../features/user/userSlice";
 import {
     Avatar,
@@ -30,7 +25,7 @@ import {
     onAuthStateChanged,
     signInWithPopup,
 } from "firebase/auth";
-import { auth, provider } from "../firebase";
+import { auth, db, provider } from "../firebase";
 
 const settings = ["Settings", "Logout"];
 
@@ -73,26 +68,44 @@ const Profile = () => {
                 break;
             case "Log In":
                 signInWithPopup(auth, provider)
-                    .then((result) => {
+                    .then(async (result) => {
+                        console.log("testing!");
                         // This gives you a Google Access Token. You can use it to access the Google API.
                         const credential =
                             GoogleAuthProvider.credentialFromResult(result);
                         const token = credential.accessToken;
-                        // The signed-in user info.
                         const googleUser = {
-                            id: result.user.uid,
+                            uid: result.user.uid,
                             name: result.user.displayName,
                             photoURL: result.user.photoURL,
                         };
-                        dispatch(updateGoogleUser(googleUser));
+                        const userSnap = await getDoc(
+                            doc(db, "users", result.user.uid)
+                        );
+                        if (userSnap.exists()) {
+                            dispatch(updateGoogleUser(googleUser));
+                            dispatch(updateSiteUser(userSnap.data()));
+                        } else {
+                            //new user is created
+                            const siteUser = {
+                                handle: "Unknown",
+                                avatar: "rocket",
+                            };
+                            const docRef = await setDoc(
+                                doc(db, "users", googleUser.uid),
+                                siteUser
+                            );
+                            dispatch(updateGoogleUser(googleUser));
+                            dispatch(updateSiteUser(siteUser));
+                        }
                         // ...
                     })
                     .catch((error) => {
                         // Handle Errors here.
                         const errorCode = error.code;
                         const errorMessage = error.message;
+                        console.log(errorMessage);
                         // The email of the user's account used.
-                        const email = error.customData.email;
                         // The AuthCredential type that was used.
                         const credential =
                             GoogleAuthProvider.credentialFromError(error);
@@ -102,6 +115,7 @@ const Profile = () => {
                 break;
             case "Log Out":
                 auth.signOut().then(dispatch(updateGoogleUser(null)));
+                dispatch(updateSiteUser(null));
                 setAnchorElUser(null);
                 break;
             default:
@@ -113,7 +127,7 @@ const Profile = () => {
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar>{handle.charAt(0)}</Avatar>
+                    <Avatar>{siteUser ? siteUser.avatar : "A"}</Avatar>
                 </IconButton>
             </Tooltip>
             <Menu
