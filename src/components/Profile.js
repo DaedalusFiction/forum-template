@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { collection, addDoc, doc, setDoc, getDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 import {
     updateGoogleUser,
@@ -65,6 +66,7 @@ const Profile = () => {
         switch (e.target.innerHTML) {
             case "Settings":
                 setAnchorElUser(null);
+
                 break;
             case "Log In":
                 signInWithPopup(auth, provider)
@@ -152,9 +154,16 @@ const Profile = () => {
                     </MenuItem>
                 )}
                 {googleUser && (
-                    <MenuItem onClick={handleMenuClick}>
-                        <Typography textAlign="center">Settings</Typography>
-                    </MenuItem>
+                    <Link to="settings">
+                        <MenuItem>
+                            <Typography
+                                textAlign="center"
+                                sx={{ color: "var(--fc-primary)" }}
+                            >
+                                Settings
+                            </Typography>
+                        </MenuItem>
+                    </Link>
                 )}
                 {googleUser && (
                     <MenuItem onClick={handleMenuClick}>

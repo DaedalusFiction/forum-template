@@ -8,9 +8,12 @@
 :root {
     --bg-accent: rgb(255, 64, 0);
     --fc-primary: rgb(30, 30, 30);
-    --fc-light: rgb(233, 233, 233);
+    --fc-primary-muted: rgb(121, 121, 121);
+    --fc-secondary: white;
+    --fc-secondary-muted: rgb(233, 233, 233);
 }
 
 a {
     text-decoration: none;
+    color: inherit;
 }

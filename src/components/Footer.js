@@ -48,7 +48,7 @@ const Footer = () => {
                                 >
                                     <Typography
                                         sx={{
-                                            color: "var(--fc-light)",
+                                            color: "var(--fc-secondary-muted)",
                                             fontSize: ".8rem",
                                             "&:hover": { color: "white" },
                                         }}

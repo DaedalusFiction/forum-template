@@ -41,7 +41,9 @@ const Header = () => {
                             },
                         }}
                     >
-                        <Typography>LOGO</Typography>
+                        <Link to="/">
+                            <Typography>LOGO</Typography>
+                        </Link>
                     </Box>
 
                     <Box
@@ -55,7 +57,7 @@ const Header = () => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
-                            sx={{ color: "var(--fc-light)" }}
+                            sx={{ color: "var(--fc-secondary-muted)" }}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -104,7 +106,9 @@ const Header = () => {
                             margin: "0 auto",
                         }}
                     >
-                        <Typography>LOGO</Typography>
+                        <Link to="/">
+                            <Typography>LOGO</Typography>
+                        </Link>
                     </Box>
                     <Box
                         sx={{
@@ -125,7 +129,7 @@ const Header = () => {
                                             location.pathname ===
                                             `/${page.toLowerCase()}`
                                                 ? "white"
-                                                : "var(--fc-light)",
+                                                : "var(--fc-secondary-muted)",
                                         display: "block",
                                         "&:hover": {
                                             color: "white",

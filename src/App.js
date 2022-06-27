@@ -6,6 +6,7 @@ import Layout from "./routes/Layout";
 import Home from "./routes/Home";
 import Nopage from "./routes/Nopage";
 import Forums from "./routes/Forums";
+import Settings from "./routes/Settings";
 
 const theme = createTheme({
     palette: {
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="forums" element={<Forums />} />
+                        <Route path="settings" element={<Settings />} />
 
                         <Route path="*" element={<Nopage />} />
                     </Route>
