@@ -7,8 +7,7 @@ import useGetPosts from "../hooks/useGetPosts";
 
 const Forum = () => {
     const params = useParams();
-    const [page, setPage] = useState(0);
-    const [posts] = useGetPosts(params.forum, "1");
+    const [posts] = useGetPosts(params.forum, params.page);
     useEffect(() => {
         if (posts) {
             console.log(posts[0].data().avatar);

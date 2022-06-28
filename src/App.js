@@ -8,6 +8,7 @@ import Nopage from "./routes/Nopage";
 import Forums from "./routes/Forums";
 import Settings from "./routes/Settings";
 import Forum from "./routes/Forum";
+import Post from "./routes/Post";
 
 const theme = createTheme({
     palette: {
@@ -31,6 +32,10 @@ function App() {
                         <Route
                             path="/forums/:category/:forum/:page"
                             element={<Forum />}
+                        />
+                        <Route
+                            path="/posts/:category/:forum/:id"
+                            element={<Post />}
                         />
                         <Route path="settings" element={<Settings />} />
 
