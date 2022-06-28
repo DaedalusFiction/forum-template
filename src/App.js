@@ -29,7 +29,7 @@ function App() {
                         <Route index element={<Home />} />
                         <Route path="forums" element={<Forums />}></Route>
                         <Route
-                            path="/forums/:category/:forum"
+                            path="/forums/:category/:forum/:page"
                             element={<Forum />}
                         />
                         <Route path="settings" element={<Settings />} />

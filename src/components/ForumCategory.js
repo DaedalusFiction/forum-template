@@ -24,7 +24,10 @@ const ForumCategory = ({ category }) => {
             >
                 {category.name}
             </Typography>
-            <Typography variant="h6" sx={{ color: "var(--fc-primary-muted)" }}>
+            <Typography
+                variant="h6"
+                sx={{ color: "var(--fc-primary-muted)", marginBottom: "1rem" }}
+            >
                 {category.description}
             </Typography>
             <Grid container>
@@ -36,11 +39,18 @@ const ForumCategory = ({ category }) => {
                                     "/forums/" +
                                     category.name +
                                     "/" +
-                                    subcategory
+                                    subcategory +
+                                    "/1"
                                 }
                             >
                                 <Typography
-                                    sx={{ textTransform: "capitalize" }}
+                                    sx={{
+                                        textTransform: "capitalize",
+                                        fontSize: "1.1rem",
+                                        "&:hover": {
+                                            textDecoration: "underline",
+                                        },
+                                    }}
                                 >
                                     {subcategory}
                                 </Typography>

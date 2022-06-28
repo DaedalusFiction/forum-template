@@ -22,10 +22,6 @@ const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const pathArray = window.location.pathname.split("/");
 
-    React.useEffect(() => {
-        console.log(pathArray[1]);
-    }, []);
-
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };

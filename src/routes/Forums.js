@@ -39,7 +39,16 @@ const Forums = () => {
     ];
     return (
         <Container>
-            <Typography variant="h1">Forums</Typography>
+            <Typography
+                variant="h1"
+                sx={{
+                    fontSize: "4rem",
+                    fontWeight: "bold",
+                    margin: "1.5em 0 .25em 0",
+                }}
+            >
+                Forums
+            </Typography>
             <Grid container spacing={2}>
                 <Grid
                     item
