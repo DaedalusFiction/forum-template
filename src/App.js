@@ -7,6 +7,7 @@ import Home from "./routes/Home";
 import Nopage from "./routes/Nopage";
 import Forums from "./routes/Forums";
 import Settings from "./routes/Settings";
+import Forum from "./routes/Forum";
 
 const theme = createTheme({
     palette: {
@@ -26,7 +27,11 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
-                        <Route path="forums" element={<Forums />} />
+                        <Route path="forums" element={<Forums />}></Route>
+                        <Route
+                            path="/forums/:category/:forum"
+                            element={<Forum />}
+                        />
                         <Route path="settings" element={<Settings />} />
 
                         <Route path="*" element={<Nopage />} />

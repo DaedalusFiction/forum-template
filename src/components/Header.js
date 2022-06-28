@@ -20,6 +20,11 @@ const pages = ["Forums", "Two", "Three"];
 const Header = () => {
     const location = useLocation();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const pathArray = window.location.pathname.split("/");
+
+    React.useEffect(() => {
+        console.log(pathArray[1]);
+    }, []);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -126,8 +131,8 @@ const Header = () => {
                                     sx={{
                                         my: 2,
                                         color:
-                                            location.pathname ===
-                                            `/${page.toLowerCase()}`
+                                            pathArray[1] ===
+                                            `${page.toLowerCase()}`
                                                 ? "white"
                                                 : "var(--fc-secondary-muted)",
                                         display: "block",

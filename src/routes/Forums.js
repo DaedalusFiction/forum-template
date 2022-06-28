@@ -5,34 +5,34 @@ import ForumCategory from "../components/ForumCategory";
 const Forums = () => {
     const categoriesLeft = [
         {
-            name: "General",
+            name: "general",
             description: "General Discussion",
             subcategories: ["first", "second", "third", "fourth"],
         },
         {
-            name: "General",
+            name: "off-topic",
             description: "General Discussion",
             subcategories: ["first", "second", "third"],
         },
         {
-            name: "General",
+            name: "announcements",
             description: "General Discussion",
             subcategories: ["first", "second"],
         },
     ];
     const categoriesRight = [
         {
-            name: "General",
+            name: "news",
             description: "General Discussion",
             subcategories: ["first", "second", "third", "fourth", "fifth"],
         },
         {
-            name: "General",
+            name: "suggestions",
             description: "General Discussion",
             subcategories: ["first", "second"],
         },
         {
-            name: "General",
+            name: "questions",
             description: "General Discussion",
             subcategories: ["first", "second", "third"],
         },
@@ -66,7 +66,9 @@ const Forums = () => {
                     }}
                 >
                     {categoriesRight.map((category) => {
-                        return <ForumCategory category={category} />;
+                        return (
+                            <ForumCategory key={category} category={category} />
+                        );
                     })}
                 </Grid>
             </Grid>
