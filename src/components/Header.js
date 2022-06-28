@@ -18,7 +18,6 @@ import Profile from "../components/Profile.js";
 const pages = ["Forums", "Two", "Three"];
 
 const Header = () => {
-    const location = useLocation();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const pathArray = window.location.pathname.split("/");
 
