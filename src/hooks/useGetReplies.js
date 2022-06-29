@@ -13,15 +13,13 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
-function useGetReplies(id) {
+function useGetReplies(category, forum, id) {
     const [replies, setReplies] = useState(null);
 
     useEffect(() => {
         async function getReplies() {
             const postsQuery = query(
-                collectionGroup(db, "replies"),
-                where("parentID", "==", id),
-                orderBy("createdAt", "desc"),
+                collection(db, `forums/${category}/${forum}/${id}/replies`),
                 // startAfter(0),
                 limit(25)
             );

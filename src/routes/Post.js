@@ -13,7 +13,7 @@ import InputReply from "../components/InputReply";
 const Post = () => {
     const params = useParams();
     const post = useGetPost(params.category, params.forum, params.id);
-    const replies = useGetReplies(params.id);
+    const replies = useGetReplies(params.category, params.forum, params.id);
 
     return (
         <Container maxWidth="lg">

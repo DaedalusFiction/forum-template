@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 
-import { useParams } from "react-router-dom";
+import {
+    collection,
+    addDoc,
+    doc,
+    collectionGroup,
+    query,
+    orderBy,
+    limit,
+    getDocs,
+    getDoc,
+    where,
+    startAfter,
+} from "firebase/firestore";
+
+import { useParams, useNavigate } from "react-router-dom";
 import {
     Box,
     Button,
@@ -16,15 +30,29 @@ import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import { selectSiteUser } from "../features/user/userSlice";
 
 import { useSelector } from "react-redux";
+import { db } from "../firebase";
 
 const InputReply = () => {
     const [body, setBody] = useState("");
     const siteUser = useSelector(selectSiteUser);
     const params = useParams();
+    const navigate = useNavigate();
 
     const handleBodyChange = (e) => {
         setBody(e.target.value);
         console.log(body);
+    };
+
+    const handleCreateReply = async (e) => {
+        e.preventDefault();
+        const collectionRef = collection(
+            db,
+            `forums/${params.category}/${params.forum}/${params.id}/replies`
+        );
+        const uploadTask = await addDoc(collectionRef, {
+            author: siteUser.handle,
+            body: body,
+        });
     };
     return (
         <Box sx={{ margin: "3em 0 3em 0" }}>
@@ -46,7 +74,9 @@ const InputReply = () => {
                         </Grid>
                     </Grid>
                     <Box sx={{ display: "flex", justifyContent: "end" }}>
-                        <Button variant="contained">Reply</Button>
+                        <Button variant="contained" onClick={handleCreateReply}>
+                            Reply
+                        </Button>
                     </Box>
                 </Box>
             )}
