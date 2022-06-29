@@ -45,7 +45,7 @@ const Post = () => {
                         <Grid container spacing={2} sx={{ margin: "2em 0" }}>
                             <Grid item xs={12} sm={2}>
                                 <Typography sx={{ fontWeight: "bold" }}>
-                                    {post.data().author}
+                                    {post.data().author}:
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} sm={10}>
