@@ -22,6 +22,10 @@ const PostPreview = ({ post }) => {
                     alignItems: "center",
                     padding: ".5em",
                     border: "1px solid black",
+                    background: "var(--bg-light)",
+                    "&:hover": {
+                        background: "white",
+                    },
                 }}
             >
                 <Typography variant="h5">{topic}</Typography>

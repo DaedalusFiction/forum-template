@@ -61,7 +61,12 @@ const Forums = () => {
                     }}
                 >
                     {categoriesLeft.map((category) => {
-                        return <ForumCategory category={category} />;
+                        return (
+                            <ForumCategory
+                                key={category.name}
+                                category={category}
+                            />
+                        );
                     })}
                 </Grid>
                 <Grid
@@ -76,7 +81,10 @@ const Forums = () => {
                 >
                     {categoriesRight.map((category) => {
                         return (
-                            <ForumCategory key={category} category={category} />
+                            <ForumCategory
+                                key={category.name}
+                                category={category}
+                            />
                         );
                     })}
                 </Grid>

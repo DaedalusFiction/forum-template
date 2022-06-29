@@ -9,6 +9,7 @@ import Forums from "./routes/Forums";
 import Settings from "./routes/Settings";
 import Forum from "./routes/Forum";
 import Post from "./routes/Post";
+import CreatePost from "./routes/CreatePost";
 
 const theme = createTheme({
     palette: {
@@ -28,7 +29,12 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
-                        <Route path="forums" element={<Forums />}></Route>
+                        <Route path="forums" element={<Forums />} />
+                        <Route
+                            path="/create-post/:category/:forum"
+                            element={<CreatePost />}
+                        />
+
                         <Route
                             path="/forums/:category/:forum/:page"
                             element={<Forum />}

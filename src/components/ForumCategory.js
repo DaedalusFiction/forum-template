@@ -33,16 +33,8 @@ const ForumCategory = ({ category }) => {
             <Grid container>
                 {category.subcategories.map((subcategory) => {
                     return (
-                        <Grid item xs={6}>
-                            <Link
-                                to={
-                                    "/forums/" +
-                                    category.name +
-                                    "/" +
-                                    subcategory +
-                                    "/1"
-                                }
-                            >
+                        <Grid key={subcategory} item xs={6}>
+                            <Link to={category.name + "/" + subcategory + "/1"}>
                                 <Typography
                                     sx={{
                                         textTransform: "capitalize",

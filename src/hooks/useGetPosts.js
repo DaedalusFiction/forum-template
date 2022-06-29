@@ -11,14 +11,13 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
-function useGetPosts(forum, page) {
+function useGetPosts(category, forum, page) {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
-        console.log(forum);
         async function getPosts() {
             const postsQuery = query(
-                collectionGroup(db, forum),
+                collection(db, `forums/${category}/${forum}`),
                 // orderBy("author", "desc"),
                 // startAfter(0),
                 limit(25)
@@ -34,7 +33,7 @@ function useGetPosts(forum, page) {
         }
 
         getPosts();
-    }, [forum, page]);
+    }, [forum, page, category]);
     return [posts];
 }
 

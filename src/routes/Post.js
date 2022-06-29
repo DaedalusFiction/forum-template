@@ -8,6 +8,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import Reply from "../components/Reply";
+import InputReply from "../components/InputReply";
 
 const Post = () => {
     const params = useParams();
@@ -63,6 +64,7 @@ const Post = () => {
                 replies.map((reply, index) => {
                     return <Reply key={index} reply={reply} />;
                 })}
+            <InputReply />
         </Container>
     );
 };

@@ -11,7 +11,6 @@ const ForumHeader = () => {
                 display: "flex",
                 gap: ".5em",
                 alignItems: "center",
-                margin: "5em 0 2em 0",
             }}
         >
             <Typography

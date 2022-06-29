@@ -19,7 +19,7 @@ function useGetPost(category, forum, id) {
     useEffect(() => {
         async function getPost() {
             // console.log(id);
-            const docRef = doc(db, "forums/general/first", id);
+            const docRef = doc(db, `forums/${category}/${forum}`, id);
             const newPost = await getDoc(docRef);
             // console.log(newPost.data());
 
@@ -27,7 +27,7 @@ function useGetPost(category, forum, id) {
         }
 
         getPost();
-    }, [forum, id]);
+    }, [forum, id, category]);
     return post;
 }
 
