@@ -6,7 +6,7 @@
 }
 
 :root {
-    /* --bg-accent: rgb(162, 0, 255); */
+    --bg-accent: rgb(162, 0, 255);
     --bg-accent: #2f9c95;
     --bg-light: rgb(245, 245, 245);
     --fc-primary: rgb(30, 30, 30);
