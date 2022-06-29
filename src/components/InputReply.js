@@ -32,7 +32,7 @@ import { selectSiteUser } from "../features/user/userSlice";
 import { useSelector } from "react-redux";
 import { db } from "../firebase";
 
-const InputReply = () => {
+const InputReply = ({ setOpen }) => {
     const [body, setBody] = useState("");
     const siteUser = useSelector(selectSiteUser);
     const params = useParams();
@@ -40,7 +40,6 @@ const InputReply = () => {
 
     const handleBodyChange = (e) => {
         setBody(e.target.value);
-        console.log(body);
     };
 
     const handleCreateReply = async (e) => {
@@ -49,10 +48,15 @@ const InputReply = () => {
             db,
             `forums/${params.category}/${params.forum}/${params.id}/replies`
         );
-        const uploadTask = await addDoc(collectionRef, {
-            author: siteUser.handle,
-            body: body,
-        });
+        if (body !== "") {
+            const uploadTask = await addDoc(collectionRef, {
+                author: siteUser.handle,
+                body: body,
+                createdAt: Date.now(),
+            });
+            setBody("");
+            setOpen(true);
+        }
     };
     return (
         <Box sx={{ margin: "3em 0 3em 0" }}>
@@ -65,6 +69,7 @@ const InputReply = () => {
                         </Grid>
                         <Grid item xs={12} sm={10}>
                             <TextareaAutosize
+                                value={body}
                                 onChange={handleBodyChange}
                                 aria-label="body-reply"
                                 minRows={6}

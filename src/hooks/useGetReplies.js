@@ -20,6 +20,7 @@ function useGetReplies(category, forum, id) {
         async function getReplies() {
             const postsQuery = query(
                 collection(db, `forums/${category}/${forum}/${id}/replies`),
+                orderBy("createdAt", "asc"),
                 // startAfter(0),
                 limit(25)
             );
@@ -34,7 +35,7 @@ function useGetReplies(category, forum, id) {
         }
 
         getReplies();
-    }, [id]);
+    }, [id, category, forum]);
     return replies;
 }
 

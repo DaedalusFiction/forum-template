@@ -32,6 +32,25 @@ const Reply = ({ reply }) => {
                         <FlagIcon />
                     </Box>
                     <Divider sx={{ marginBottom: "1em" }} />
+                    <Typography
+                        sx={{
+                            color: "var(--fc-primary-muted)",
+                            fontSize: ".75rem",
+                        }}
+                    >
+                        Last updated:{" "}
+                        {reply.data().createdAt &&
+                            new Date(reply.data().createdAt).toLocaleDateString(
+                                "en-us",
+                                {
+                                    weekday: "short",
+                                    month: "short",
+                                    day: "numeric",
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                }
+                            )}
+                    </Typography>
                 </Grid>
             </Grid>
         </Box>

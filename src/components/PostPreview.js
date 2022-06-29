@@ -9,19 +9,13 @@ const PostPreview = ({ post }) => {
         "/posts/" + params.category + "/" + params.forum + "/" + post.id;
     return (
         <Link to={postLocation}>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography variant="h5" sx={{ fontSize: "1rem" }}>
-                    Topic
-                </Typography>
-                <Typography sx={{ fontSize: "1rem" }}>Author</Typography>
-            </Box>
             <Box
                 sx={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     padding: ".5em",
-                    border: "1px solid black",
+                    border: "1px solid var(--fc-primary-muted)",
                     background: "var(--bg-light)",
                     "&:hover": {
                         background: "white",

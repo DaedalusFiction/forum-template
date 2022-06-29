@@ -18,7 +18,7 @@ function useGetPosts(category, forum, page) {
         async function getPosts() {
             const postsQuery = query(
                 collection(db, `forums/${category}/${forum}`),
-                // orderBy("author", "desc"),
+                orderBy("createdAt", "desc"),
                 // startAfter(0),
                 limit(25)
             );

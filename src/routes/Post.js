@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useGetPost from "../hooks/useGetPost";
 import useGetReplies from "../hooks/useGetReplies";
 import { useParams } from "react-router-dom";
@@ -7,11 +7,18 @@ import ReplyIcon from "@mui/icons-material/Reply";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Reply from "../components/Reply";
 import InputReply from "../components/InputReply";
+import { selectSiteUser } from "../features/user/userSlice";
+
+import { useSelector } from "react-redux";
+import Notification from "../components/Notification";
 
 const Post = () => {
+    const [open, setOpen] = useState(false);
     const params = useParams();
+    const siteUser = useSelector(selectSiteUser);
     const post = useGetPost(params.category, params.forum, params.id);
     const replies = useGetReplies(params.category, params.forum, params.id);
 
@@ -54,8 +61,27 @@ const Post = () => {
                                 <ReplyIcon />
                                 <FavoriteIcon />
                                 <FlagIcon />
+                                <DeleteIcon />
                             </Box>
                             <Divider sx={{ marginBottom: "1em" }} />
+                            <Typography
+                                sx={{
+                                    color: "var(--fc-primary-muted)",
+                                    fontSize: ".75rem",
+                                }}
+                            >
+                                Last updated:{" "}
+                                {post.data().createdAt &&
+                                    new Date(
+                                        post.data().createdAt
+                                    ).toLocaleDateString("en-us", {
+                                        weekday: "short",
+                                        month: "short",
+                                        day: "numeric",
+                                        hour: "numeric",
+                                        minute: "numeric",
+                                    })}
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Box>
@@ -64,7 +90,8 @@ const Post = () => {
                 replies.map((reply, index) => {
                     return <Reply key={index} reply={reply} />;
                 })}
-            <InputReply />
+            <InputReply setOpen={setOpen} />
+            <Notification open={open} setOpen={setOpen} message="Success!" />
         </Container>
     );
 };

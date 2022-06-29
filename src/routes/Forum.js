@@ -25,6 +25,12 @@ const Forum = () => {
                     <Button variant="contained">Create Post</Button>
                 </Link>
             </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography variant="h5" sx={{ fontSize: "1rem" }}>
+                    Topic
+                </Typography>
+                <Typography sx={{ fontSize: "1rem" }}>Author</Typography>
+            </Box>
             {posts &&
                 posts.map((post, index) => {
                     return <PostPreview key={index} post={post} />;

@@ -59,6 +59,7 @@ const CreatePost = () => {
                 author: siteUser.handle,
                 topic: topic,
                 body: body,
+                createdAt: Date.now(),
             });
             navigate(`/posts/${params.category}/${params.forum}/${docRef.id}`);
         }
