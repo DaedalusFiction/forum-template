@@ -15,7 +15,7 @@ const Reply = ({ reply }) => {
                     {reply.data().author}
                 </Grid>
                 <Grid item xs={12} sm={10}>
-                    <Typography sx={{ marginBottom: "2em" }}>
+                    <Typography sx={{ marginBottom: "2em", maxWidth: "75ch" }}>
                         {reply.data().body}
                     </Typography>
                     <Box

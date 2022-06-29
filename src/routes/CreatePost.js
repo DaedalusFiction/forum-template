@@ -67,7 +67,7 @@ const CreatePost = () => {
     };
     return (
         <Container>
-            <Box sx={{ margin: "3em 0 3em 0" }}>
+            <Box sx={{ margin: "5em 0 10em 0" }}>
                 <Typography variant="h1" sx={{ fontSize: "3rem" }}>
                     Create a Post
                 </Typography>
@@ -98,6 +98,7 @@ const CreatePost = () => {
                         <Box sx={{ display: "flex", justifyContent: "end" }}>
                             <Button
                                 variant="contained"
+                                color="secondary"
                                 onClick={handleSubmitPost}
                             >
                                 Post

@@ -25,7 +25,7 @@ const Post = () => {
     return (
         <Container maxWidth="lg">
             {post && (
-                <Box sx={{ margin: "3em 0 3em 0" }}>
+                <Box sx={{ margin: "3em 0 8em 0" }}>
                     <Typography
                         variant="h1"
                         sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
@@ -46,7 +46,9 @@ const Post = () => {
                             {post.data().author}
                         </Grid>
                         <Grid item xs={12} sm={10}>
-                            <Typography sx={{ marginBottom: "2em" }}>
+                            <Typography
+                                sx={{ marginBottom: "2em", maxWidth: "75ch" }}
+                            >
                                 {post.data().body}
                             </Typography>
                             <Box

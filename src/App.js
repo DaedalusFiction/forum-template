@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Layout from "./routes/Layout";
 import Home from "./routes/Home";
 import Nopage from "./routes/Nopage";
@@ -13,11 +13,14 @@ import CreatePost from "./routes/CreatePost";
 
 const theme = createTheme({
     palette: {
+        background: {
+            default: "rgb(250, 250, 250)",
+        },
         primary: {
-            main: "#758ecd",
+            main: "#2F9C95",
         },
         secondary: {
-            main: "#e72419",
+            main: "#273C2C",
         },
     },
 });
@@ -25,6 +28,7 @@ const theme = createTheme({
 function App() {
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>

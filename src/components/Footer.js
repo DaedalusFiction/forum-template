@@ -60,11 +60,9 @@ const Footer = () => {
                             );
                         })}
                     </Box>
-                    <Link to="/">
-                        <Button onClick={navigateToTop} sx={{ color: "white" }}>
-                            Back to Top
-                        </Button>
-                    </Link>
+                    <Button onClick={navigateToTop} sx={{ color: "white" }}>
+                        Back to Top
+                    </Button>
                 </Box>
                 <Typography
                     sx={{

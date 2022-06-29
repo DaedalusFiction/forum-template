@@ -7,7 +7,7 @@ const Forums = () => {
         {
             name: "general",
             description: "General Discussion",
-            subcategories: ["first", "second", "third", "fourth"],
+            subcategories: ["Music Suggestions", "second", "third", "fourth"],
         },
         {
             name: "off-topic",
