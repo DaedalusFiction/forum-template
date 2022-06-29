@@ -9,13 +9,14 @@ const ForumHeader = () => {
         <Box
             sx={{
                 display: "flex",
+                flexWrap: "wrap",
                 gap: ".5em",
                 alignItems: "center",
             }}
         >
             <Typography
                 sx={{
-                    fontSize: "2rem",
+                    fontSize: { xs: "1.5rem", sm: "2rem" },
                     fontWeight: "bold",
                     textTransform: "capitalize",
                 }}
@@ -29,7 +30,7 @@ const ForumHeader = () => {
                     </Typography>
                     <Typography
                         sx={{
-                            fontSize: "2rem",
+                            fontSize: { xs: "1.5rem", sm: "2rem" },
                             fontWeight: "bold",
                             textTransform: "capitalize",
                         }}

@@ -3,7 +3,7 @@ import React from "react";
 
 const Nopage = () => {
     return (
-        <Container maxWidth="lg" sx={{ paddingBottom: "7vw" }}>
+        <Container maxWidth="lg" sx={{ paddingBottom: "20rem" }}>
             <Typography
                 variant="h2"
                 sx={{

@@ -12,12 +12,15 @@ const Forum = () => {
 
     return (
         <Container maxWidth="lg">
-            <Box sx={{ margin: "8rem 0 16rem 0" }}>
+            <Box sx={{ margin: "8rem 0 20rem 0" }}>
                 <Box
                     sx={{
                         display: "flex",
+                        flexWrap: "wrap",
+                        gap: "1em",
                         justifyContent: "space-between",
                         alignItems: "center",
+                        marginBottom: "2em",
                     }}
                 >
                     <ForumHeader />

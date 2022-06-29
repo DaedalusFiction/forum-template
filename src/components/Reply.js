@@ -10,9 +10,11 @@ const Reply = ({ reply }) => {
     return (
         <Box sx={{ margin: "3em 0 3em 0" }}>
             <Divider />
-            <Grid container sx={{ margin: "2em 0" }}>
+            <Grid container spacing={2} sx={{ margin: "2em 0" }}>
                 <Grid item xs={12} sm={2}>
-                    {reply.data().author}
+                    <Typography sx={{ fontWeight: "bold" }}>
+                        {reply.data().author}
+                    </Typography>
                 </Grid>
                 <Grid item xs={12} sm={10}>
                     <Typography sx={{ marginBottom: "2em", maxWidth: "75ch" }}>

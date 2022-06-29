@@ -24,75 +24,82 @@ const Post = () => {
 
     return (
         <Container maxWidth="lg">
-            {post && (
-                <Box sx={{ margin: "3em 0 8em 0" }}>
-                    <Typography
-                        variant="h1"
-                        sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
-                    >
-                        {post.data().topic}
-                    </Typography>
-                    <Typography
-                        sx={{
-                            textTransform: "capitalize",
-                            marginBottom: "2em",
-                        }}
-                    >
-                        {params.category}
-                    </Typography>
-                    <Divider />
-                    <Grid container sx={{ margin: "2em 0" }}>
-                        <Grid item xs={12} sm={2}>
-                            {post.data().author}
+            <Box sx={{ margin: "3em 0 12em 0" }}>
+                {post && (
+                    <Box>
+                        <Typography
+                            variant="h1"
+                            sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
+                        >
+                            {post.data().topic}
+                        </Typography>
+                        <Typography
+                            sx={{
+                                textTransform: "capitalize",
+                                marginBottom: "2em",
+                            }}
+                        >
+                            {params.category}
+                        </Typography>
+                        <Divider />
+                        <Grid container spacing={2} sx={{ margin: "2em 0" }}>
+                            <Grid item xs={12} sm={2}>
+                                <Typography sx={{ fontWeight: "bold" }}>
+                                    {post.data().author}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={10}>
+                                <Typography
+                                    sx={{
+                                        marginBottom: "2em",
+                                        maxWidth: "75ch",
+                                    }}
+                                >
+                                    {post.data().body}
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        gap: ".5em",
+                                        justifyContent: "end",
+                                        marginBottom: "1em",
+                                    }}
+                                >
+                                    <FormatQuoteIcon />
+                                    <ReplyIcon />
+                                    <FavoriteIcon />
+                                    <FlagIcon />
+                                    <DeleteIcon />
+                                </Box>
+                                <Divider sx={{ marginBottom: "1em" }} />
+                                <Typography
+                                    sx={{
+                                        color: "var(--fc-primary-muted)",
+                                        fontSize: ".75rem",
+                                    }}
+                                >
+                                    Last updated:{" "}
+                                    {post.data().createdAt &&
+                                        new Date(
+                                            post.data().createdAt
+                                        ).toLocaleDateString("en-us", {
+                                            weekday: "short",
+                                            month: "short",
+                                            day: "numeric",
+                                            hour: "numeric",
+                                            minute: "numeric",
+                                        })}
+                                </Typography>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={10}>
-                            <Typography
-                                sx={{ marginBottom: "2em", maxWidth: "75ch" }}
-                            >
-                                {post.data().body}
-                            </Typography>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    gap: ".5em",
-                                    justifyContent: "end",
-                                    marginBottom: "1em",
-                                }}
-                            >
-                                <FormatQuoteIcon />
-                                <ReplyIcon />
-                                <FavoriteIcon />
-                                <FlagIcon />
-                                <DeleteIcon />
-                            </Box>
-                            <Divider sx={{ marginBottom: "1em" }} />
-                            <Typography
-                                sx={{
-                                    color: "var(--fc-primary-muted)",
-                                    fontSize: ".75rem",
-                                }}
-                            >
-                                Last updated:{" "}
-                                {post.data().createdAt &&
-                                    new Date(
-                                        post.data().createdAt
-                                    ).toLocaleDateString("en-us", {
-                                        weekday: "short",
-                                        month: "short",
-                                        day: "numeric",
-                                        hour: "numeric",
-                                        minute: "numeric",
-                                    })}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )}
-            {replies &&
-                replies.map((reply, index) => {
-                    return <Reply key={index} reply={reply} />;
-                })}
-            <InputReply setOpen={setOpen} />
+                    </Box>
+                )}
+                {replies &&
+                    replies.map((reply, index) => {
+                        return <Reply key={index} reply={reply} />;
+                    })}
+                <InputReply setOpen={setOpen} />
+            </Box>
             <Notification open={open} setOpen={setOpen} message="Success!" />
         </Container>
     );
