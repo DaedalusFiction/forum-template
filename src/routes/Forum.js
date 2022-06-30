@@ -1,7 +1,6 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ForumHeader from "../components/ForumHeader";
 import PostPreview from "../components/PostPreview";
 import useGetPosts from "../hooks/useGetPosts";
 import { Link } from "react-router-dom";
@@ -23,7 +22,12 @@ const Forum = () => {
                         marginBottom: "2em",
                     }}
                 >
-                    <ForumHeader />
+                    <Typography
+                        variant="h1"
+                        sx={{ textTransform: "capitalize" }}
+                    >
+                        {params.forum}
+                    </Typography>
                     <Link
                         to={`/create-post/${params.category}/${params.forum}`}
                     >
@@ -37,6 +41,7 @@ const Forum = () => {
                         sx={{
                             display: "flex",
                             justifyContent: "space-between",
+                            marginBottom: ".5em",
                         }}
                     >
                         <Typography variant="h5" sx={{ fontSize: "1rem" }}>

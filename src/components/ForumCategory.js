@@ -34,7 +34,7 @@ const ForumCategory = ({ category }) => {
                 {category.subcategories.map((subcategory) => {
                     return (
                         <Grid key={subcategory} item xs={6}>
-                            <Link to={category.name + "/" + subcategory + "/1"}>
+                            <Link to={category.name + "/" + subcategory}>
                                 <Typography
                                     sx={{
                                         textTransform: "capitalize",

@@ -15,7 +15,7 @@ const PostPreview = ({ post }) => {
                     justifyContent: "space-between",
                     alignItems: "center",
                     padding: ".5em",
-                    border: "1px solid var(--fc-primary-muted)",
+                    borderTop: "1px solid var(--fc-primary-muted)",
                     background: "var(--bg-light)",
                     "&:hover": {
                         background: "white",
