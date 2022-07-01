@@ -14,6 +14,7 @@ import { selectSiteUser } from "../features/user/userSlice";
 
 import { useSelector } from "react-redux";
 import Notification from "../components/Notification";
+import Breadcrumb from "../components/Breadcrumb";
 
 const Post = () => {
     const [open, setOpen] = useState(false);
@@ -24,7 +25,8 @@ const Post = () => {
 
     return (
         <Container maxWidth="lg">
-            <Box sx={{ margin: "3em 0 12em 0" }}>
+            <Breadcrumb />
+            <Box>
                 {post && (
                     <Box>
                         <Typography

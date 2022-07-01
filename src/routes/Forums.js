@@ -1,42 +1,9 @@
 import { Container, Grid, Typography } from "@mui/material";
 import React from "react";
-import ForumCategory from "../components/ForumCategory";
+import CategoryBox from "../components/CategoryBox";
+import forumData from "../config/forumData.json";
 
 const Forums = () => {
-    const categoriesLeft = [
-        {
-            name: "general",
-            description: "General Discussion",
-            subcategories: ["Music Suggestions", "second", "third", "fourth"],
-        },
-        {
-            name: "off-topic",
-            description: "General Discussion",
-            subcategories: ["first", "second", "third"],
-        },
-        {
-            name: "announcements",
-            description: "General Discussion",
-            subcategories: ["first", "second"],
-        },
-    ];
-    const categoriesRight = [
-        {
-            name: "news",
-            description: "General Discussion",
-            subcategories: ["first", "second", "third", "fourth", "fifth"],
-        },
-        {
-            name: "suggestions",
-            description: "General Discussion",
-            subcategories: ["first", "second"],
-        },
-        {
-            name: "questions",
-            description: "General Discussion",
-            subcategories: ["first", "second", "third"],
-        },
-    ];
     return (
         <Container>
             <Typography
@@ -44,7 +11,6 @@ const Forums = () => {
                 sx={{
                     fontSize: "4rem",
                     fontWeight: "bold",
-                    margin: "1.5em 0 .25em 0",
                 }}
             >
                 Forums
@@ -60,12 +26,14 @@ const Forums = () => {
                         gap: "1em",
                     }}
                 >
-                    {categoriesLeft.map((category) => {
+                    {forumData.categories.map((category, index) => {
                         return (
-                            <ForumCategory
-                                key={category.name}
-                                category={category}
-                            />
+                            index % 2 === 0 && (
+                                <CategoryBox
+                                    key={category.name}
+                                    category={category}
+                                />
+                            )
                         );
                     })}
                 </Grid>
@@ -79,12 +47,14 @@ const Forums = () => {
                         gap: "1em",
                     }}
                 >
-                    {categoriesRight.map((category) => {
+                    {forumData.categories.map((category, index) => {
                         return (
-                            <ForumCategory
-                                key={category.name}
-                                category={category}
-                            />
+                            index % 2 === 1 && (
+                                <CategoryBox
+                                    key={category.name}
+                                    category={category}
+                                />
+                            )
                         );
                     })}
                 </Grid>

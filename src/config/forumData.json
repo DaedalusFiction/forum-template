@@ -1,0 +1,34 @@
+{
+    "categories": [
+        {
+            "name": "general",
+            "description": "General Discussion",
+            "subcategories": ["Music Suggestions", "second", "third", "fourth"]
+        },
+        {
+            "name": "off-topic",
+            "description": "General Discussion",
+            "subcategories": ["first", "second", "third"]
+        },
+        {
+            "name": "announcements",
+            "description": "General Discussion",
+            "subcategories": ["first", "second"]
+        },
+        {
+            "name": "news",
+            "description": "General Discussion",
+            "subcategories": ["first", "second", "third", "fourth", "fifth"]
+        },
+        {
+            "name": "suggestions",
+            "description": "General Discussion",
+            "subcategories": ["first", "second"]
+        },
+        {
+            "name": "questions",
+            "description": "General Discussion",
+            "subcategories": ["first", "second", "third"]
+        }
+    ]
+}

@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import React from "react";
 
-const ForumCategory = ({ category }) => {
+const CategoryBox = ({ category }) => {
     return (
         <Box
             sx={{
@@ -14,22 +14,27 @@ const ForumCategory = ({ category }) => {
                 },
             }}
         >
-            <Typography
-                variant="h2"
-                sx={{
-                    fontSize: "2rem",
-                    fontWeight: "bold",
-                    textTransform: "capitalize",
-                }}
-            >
-                {category.name}
-            </Typography>
-            <Typography
-                variant="h6"
-                sx={{ color: "var(--fc-primary-muted)", marginBottom: "1rem" }}
-            >
-                {category.description}
-            </Typography>
+            <Link to={category.name}>
+                <Typography
+                    variant="h2"
+                    sx={{
+                        fontSize: "2rem",
+                        fontWeight: "bold",
+                        textTransform: "capitalize",
+                    }}
+                >
+                    {category.name}
+                </Typography>
+                <Typography
+                    variant="h6"
+                    sx={{
+                        color: "var(--fc-primary-muted)",
+                        marginBottom: "1rem",
+                    }}
+                >
+                    {category.description}
+                </Typography>
+            </Link>
             <Grid container>
                 {category.subcategories.map((subcategory) => {
                     return (
@@ -55,4 +60,4 @@ const ForumCategory = ({ category }) => {
     );
 };
 
-export default ForumCategory;
+export default CategoryBox;

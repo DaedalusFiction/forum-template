@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import PostPreview from "../components/PostPreview";
 import useGetPosts from "../hooks/useGetPosts";
 import { Link } from "react-router-dom";
+import Breadcrumb from "../components/Breadcrumb";
 
 const Forum = () => {
     const params = useParams();
@@ -11,7 +12,8 @@ const Forum = () => {
 
     return (
         <Container maxWidth="lg">
-            <Box sx={{ margin: "8rem 0 20rem 0" }}>
+            <Breadcrumb />
+            <Box>
                 <Box
                     sx={{
                         display: "flex",
@@ -19,7 +21,6 @@ const Forum = () => {
                         gap: "1em",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        marginBottom: "2em",
                     }}
                 >
                     <Typography

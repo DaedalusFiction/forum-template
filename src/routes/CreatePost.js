@@ -67,7 +67,7 @@ const CreatePost = () => {
     };
     return (
         <Container>
-            <Box sx={{ margin: "8em 0 20em 0" }}>
+            <Box>
                 <Typography variant="h1" sx={{ fontSize: "3rem" }}>
                     Create a Post
                 </Typography>
