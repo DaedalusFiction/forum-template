@@ -20,9 +20,7 @@ const Breadcrumb = () => {
                             <Link
                                 key={value}
                                 to={
-                                    "/" +
-                                    base +
-                                    "/" +
+                                    "/forums/" +
                                     values.slice(0, index + 1).join("/")
                                 }
                             >

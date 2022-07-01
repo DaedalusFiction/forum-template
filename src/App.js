@@ -25,10 +25,21 @@ const theme = createTheme({
         },
     },
     typography: {
+        fontFamily: "var(--ff-primary)",
+        color: "var(--fc-primary)",
         h1: {
-            fontSize: "3.5rem",
+            fontSize: "5rem",
+            fontFamily: "var(--ff-secondary)",
         },
+        h2: {
+            fontSize: "3rem",
+            fontFamily: "var(--ff-secondary)",
+        },
+
         h5: {
+            fontSize: "1.2rem",
+        },
+        h6: {
             fontSize: "1.2rem",
         },
     },
@@ -50,15 +61,15 @@ function App() {
                         />
 
                         <Route
-                            path="/forums/:category/:forum"
-                            element={<Forum />}
-                        />
-                        <Route
                             path="/forums/:category"
                             element={<Category />}
                         />
                         <Route
-                            path="/posts/:category/:forum/:id"
+                            path="/forums/:category/:forum"
+                            element={<Forum />}
+                        />
+                        <Route
+                            path="/forums/:category/:forum/:id"
                             element={<Post />}
                         />
                         <Route path="settings" element={<Settings />} />

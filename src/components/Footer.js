@@ -21,7 +21,7 @@ const Footer = () => {
             sx={{
                 backgroundColor: "var(--bg-accent)",
                 padding: "2rem 0",
-                marginTop: "4rem",
+                marginTop: "8rem",
             }}
         >
             <Container>

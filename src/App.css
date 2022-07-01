@@ -3,16 +3,25 @@
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 :root {
     --bg-accent: rgb(162, 0, 255);
     --bg-accent: #2f9c95;
     --bg-light: rgb(245, 245, 245);
-    --fc-primary: rgb(30, 30, 30);
+    --border-light: rgb(205, 204, 204);
+    --fc-primary: rgb(78, 78, 78);
     --fc-primary-muted: rgb(121, 121, 121);
     --fc-secondary: white;
     --fc-secondary-muted: rgb(233, 233, 233);
+    --ff-primary: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    --ff-primary: "Times New Roman", Times, serif;
+    --ff-primary: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    --ff-primary: Arial, Helvetica, sans-serif;
+    --ff-primary: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    --ff-secondary: Verdana, Geneva, Tahoma, sans-serif;
+    --ff-secondary: Georgia, "Times New Roman", Times, serif;
 }
 
 a {

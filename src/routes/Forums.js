@@ -9,7 +9,6 @@ const Forums = () => {
             <Typography
                 variant="h1"
                 sx={{
-                    fontSize: "4rem",
                     fontWeight: "bold",
                 }}
             >

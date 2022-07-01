@@ -6,7 +6,7 @@ const PostPreview = ({ post }) => {
     const params = useParams();
     const { topic, author, body } = post.data();
     const postLocation =
-        "/posts/" + params.category + "/" + params.forum + "/" + post.id;
+        "/forums/" + params.category + "/" + params.forum + "/" + post.id;
     return (
         <Link to={postLocation}>
             <Box
@@ -14,9 +14,8 @@ const PostPreview = ({ post }) => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    padding: ".5em",
-                    borderTop: "1px solid var(--fc-primary-muted)",
-                    background: "var(--bg-light)",
+                    padding: ".75em 0",
+                    borderTop: "1px solid var(--border-light)",
                     "&:hover": {
                         background: "white",
                     },

@@ -30,7 +30,10 @@ const Header = () => {
     };
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: "var(--bg-accent)" }}>
+        <AppBar
+            position="static"
+            sx={{ backgroundColor: "var(--bg-accent)", marginBottom: "8rem" }}
+        >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box

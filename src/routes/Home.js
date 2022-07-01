@@ -4,7 +4,7 @@ import React from "react";
 const Home = () => {
     return (
         <Container>
-            <Box sx={{ margin: "5rem 0 10rem 0" }}>
+            <Box>
                 <Typography variant="h1">The Forums</Typography>
                 <Typography sx={{ maxWidth: "75ch", marginBottom: "1em" }}>
                     Welcome to The Forums, the world's greatest forum template!

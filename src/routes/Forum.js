@@ -45,10 +45,20 @@ const Forum = () => {
                             marginBottom: ".5em",
                         }}
                     >
-                        <Typography variant="h5" sx={{ fontSize: "1rem" }}>
+                        <Typography
+                            sx={{
+                                fontSize: "1rem",
+                                color: "var(--fc-primary-muted)",
+                            }}
+                        >
                             Topic
                         </Typography>
-                        <Typography sx={{ fontSize: "1rem" }}>
+                        <Typography
+                            sx={{
+                                fontSize: "1rem",
+                                color: "var(--fc-primary-muted)",
+                            }}
+                        >
                             Author
                         </Typography>
                     </Box>
