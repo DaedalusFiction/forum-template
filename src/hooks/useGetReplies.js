@@ -20,9 +20,8 @@ function useGetReplies(category, forum, id) {
         async function getReplies() {
             const postsQuery = query(
                 collection(db, `forums/${category}/${forum}/${id}/replies`),
-                orderBy("createdAt", "asc"),
+                orderBy("createdAt", "asc")
                 // startAfter(0),
-                limit(25)
             );
 
             const docsSnap = await getDocs(postsQuery);

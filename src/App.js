@@ -30,6 +30,7 @@ const theme = createTheme({
         h1: {
             fontSize: "5rem",
             fontFamily: "var(--ff-secondary)",
+            fontWeight: "bold",
         },
         h2: {
             fontSize: "3rem",

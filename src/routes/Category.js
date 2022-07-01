@@ -30,17 +30,15 @@ const Category = () => {
                                     sx={{
                                         background: "var(--bg-light)",
                                         border: "1px solid var(--border-light)",
-                                        padding: "1em",
+                                        padding: "1em 2em",
                                         "&:hover": {
                                             background: "white",
                                         },
                                     }}
                                 >
                                     <Typography
-                                        sx={{
-                                            color: "var(--fc-primary)",
-                                            fontWeight: "bold",
-                                        }}
+                                        variant="h6"
+                                        sx={{ textTransform: "capitalize" }}
                                     >
                                         {subcategory}
                                     </Typography>

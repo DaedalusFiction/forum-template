@@ -27,7 +27,6 @@ function useGetPosts(category, forum, page) {
             let newPosts = [];
             docsSnap.docs.forEach((doc, index) => {
                 newPosts = [...newPosts, doc];
-                // console.log(doc.data());
             });
             setPosts(newPosts);
         }

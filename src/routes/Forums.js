@@ -6,14 +6,7 @@ import forumData from "../config/forumData.json";
 const Forums = () => {
     return (
         <Container>
-            <Typography
-                variant="h1"
-                sx={{
-                    fontWeight: "bold",
-                }}
-            >
-                Forums
-            </Typography>
+            <Typography variant="h1">Forums</Typography>
             <Grid container spacing={2}>
                 <Grid
                     item

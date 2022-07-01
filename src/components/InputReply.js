@@ -12,6 +12,8 @@ import {
     getDoc,
     where,
     startAfter,
+    updateDoc,
+    FieldValue,
 } from "firebase/firestore";
 
 import { useParams, useNavigate } from "react-router-dom";
@@ -54,6 +56,7 @@ const InputReply = ({ setOpen }) => {
                 body: body,
                 createdAt: Date.now(),
             });
+
             setBody("");
             setOpen(true);
         }

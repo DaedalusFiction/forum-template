@@ -29,10 +29,7 @@ const Post = () => {
             <Box>
                 {post && (
                     <Box>
-                        <Typography
-                            variant="h1"
-                            sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
-                        >
+                        <Typography variant="h2" sx={{ fontWeight: "bold" }}>
                             {post.data().topic}
                         </Typography>
                         <Typography

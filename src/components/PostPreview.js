@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -7,24 +7,28 @@ const PostPreview = ({ post }) => {
     const { topic, author, body } = post.data();
     const postLocation =
         "/forums/" + params.category + "/" + params.forum + "/" + post.id;
+
     return (
-        <Link to={postLocation}>
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: ".75em 0",
-                    borderTop: "1px solid var(--border-light)",
-                    "&:hover": {
-                        background: "white",
-                    },
-                }}
-            >
-                <Typography variant="h5">{topic}</Typography>
-                <Typography>{author}</Typography>
-            </Box>
-        </Link>
+        <Tooltip title={body} followCursor>
+            <Link to={postLocation}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: ".75em 0",
+                        borderTop: "1px solid var(--border-light)",
+                        "&:hover": {
+                            background: "white",
+                        },
+                    }}
+                >
+                    <Typography variant="h5">{topic}</Typography>
+                    <Typography>{author}</Typography>
+                    <Typography>{topic}</Typography>
+                </Box>
+            </Link>
+        </Tooltip>
     );
 };
 
