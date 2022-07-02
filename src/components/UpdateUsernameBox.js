@@ -30,7 +30,7 @@ import Notification from "../components/Notification";
 
 const Settings = () => {
     const [username, setUsername] = useState("");
-    const [usernameTakenError, setUsernameTakenError] = useState(false);
+    const [usernameError, setUsernameError] = useState(false);
 
     const [usernameNotificationOpen, setUsernameNotificationOpen] =
         useState(false);
@@ -41,15 +41,15 @@ const Settings = () => {
     const dispatch = useDispatch();
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
-        setUsernameTakenError(false);
+        setUsernameError(false);
     };
     const verifyUsername = async (e) => {
-        if (username.length < 8) {
-            console.log("must be 8 characters or longer");
+        if (username.length < 8 || username.length > 12) {
+            setUsernameError("Username must be between 8 and 12");
             return;
         }
         if (username.includes(" ")) {
-            console.log("don't use spaces");
+            setUsernameError("Username must not include spaces");
             return;
         }
 
@@ -60,7 +60,7 @@ const Settings = () => {
         );
         const usernamesSnap = await getDocs(usernameQuery);
         if (usernamesSnap.docs.length > 0) {
-            setUsernameTakenError(true);
+            setUsernameError(true);
             return;
         }
         const userRef = doc(db, "users", googleUser.uid);
@@ -89,7 +89,7 @@ const Settings = () => {
                     label="Username"
                     value={username}
                     onChange={handleUsernameChange}
-                    error={usernameTakenError}
+                    error={usernameError}
                 />
                 <Button variant="contained" onClick={verifyUsername}>
                     Update
@@ -100,9 +100,7 @@ const Settings = () => {
                     message="Username Updated!"
                 />
             </Box>
-            {usernameTakenError && (
-                <Typography>That username is already taken</Typography>
-            )}
+            {usernameError && <Typography>{usernameError}</Typography>}
         </Box>
     );
 };

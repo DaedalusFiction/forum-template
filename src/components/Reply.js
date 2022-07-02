@@ -4,16 +4,24 @@ import { Box, Container, Divider, Grid, Typography } from "@mui/material";
 import ReplyIcon from "@mui/icons-material/Reply";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
+import EditIcon from "@mui/icons-material/Edit";
+
+import DeleteIcon from "@mui/icons-material/Delete";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import { useSelector } from "react-redux";
+import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 
 const Reply = ({ reply }) => {
+    const siteUser = useSelector(selectSiteUser);
+
+    const googleUser = useSelector(selectGoogleUser);
     return (
         <Box sx={{ margin: "3em 0 3em 0" }}>
             <Divider />
             <Grid container spacing={2} sx={{ margin: "2em 0" }}>
                 <Grid item xs={12} sm={2}>
                     <Typography sx={{ fontWeight: "bold" }}>
-                        {reply.data().author}
+                        {reply.data().authorUsername}
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={10}>
@@ -28,10 +36,12 @@ const Reply = ({ reply }) => {
                             marginBottom: "1em",
                         }}
                     >
-                        <FormatQuoteIcon />
-                        <ReplyIcon />
-                        <FavoriteIcon />
-                        <FlagIcon />
+                        {reply.data().authorUID === googleUser.uid && (
+                            <EditIcon />
+                        )}
+                        {reply.data().authorUID === googleUser.uid && (
+                            <DeleteIcon />
+                        )}
                     </Box>
                     <Divider sx={{ marginBottom: "1em" }} />
                     <Typography

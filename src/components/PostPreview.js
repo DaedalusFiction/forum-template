@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 const PostPreview = ({ post }) => {
     const params = useParams();
-    const { topic, author, body, replies } = post.data();
+    const { topic, authorUsername, body, replies } = post.data();
     const postLocation =
         "/forums/" + params.category + "/" + params.forum + "/" + post.id;
 
@@ -31,7 +31,7 @@ const PostPreview = ({ post }) => {
                             width: "10rem",
                         }}
                     >
-                        <Typography>{author}</Typography>
+                        <Typography>{authorUsername}</Typography>
                         <Typography>{replies}</Typography>
                     </Box>
                 </Box>

@@ -70,7 +70,8 @@ const InputReply = () => {
         }
         if (body !== "") {
             const uploadTask = await addDoc(collectionRef, {
-                author: siteUser.username,
+                authorUsername: siteUser.username,
+                authorUID: googleUser.uid,
                 body: body,
                 createdAt: currentTime,
             });

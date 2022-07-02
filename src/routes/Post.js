@@ -7,6 +7,7 @@ import ReplyIcon from "@mui/icons-material/Reply";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Reply from "../components/Reply";
 import InputReply from "../components/InputReply";
@@ -43,7 +44,7 @@ const Post = () => {
                         <Grid container spacing={2} sx={{ margin: "2em 0" }}>
                             <Grid item xs={12} sm={2}>
                                 <Typography sx={{ fontWeight: "bold" }}>
-                                    {post.data().author}:
+                                    {post.data().authorUsername}:
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} sm={10}>
@@ -63,11 +64,10 @@ const Post = () => {
                                         marginBottom: "1em",
                                     }}
                                 >
-                                    <FormatQuoteIcon />
-                                    <ReplyIcon />
-                                    <FavoriteIcon />
-                                    <FlagIcon />
-                                    <DeleteIcon />
+                                    {post.data().authorUsername ===
+                                        siteUser.username && <EditIcon />}
+                                    {post.data().authorUsername ===
+                                        siteUser.username && <DeleteIcon />}
                                 </Box>
                                 <Divider sx={{ marginBottom: "1em" }} />
                                 <Typography

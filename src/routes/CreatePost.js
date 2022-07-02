@@ -28,7 +28,7 @@ import ReplyIcon from "@mui/icons-material/Reply";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import { selectSiteUser } from "../features/user/userSlice";
+import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 
 import { useSelector } from "react-redux";
 import { db } from "../firebase";
@@ -38,6 +38,7 @@ const CreatePost = () => {
     const [body, setBody] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const siteUser = useSelector(selectSiteUser);
+    const googleUser = useSelector(selectGoogleUser);
     const params = useParams();
     const navigate = useNavigate();
 
@@ -56,12 +57,15 @@ const CreatePost = () => {
                 `forums/${params.category}/${params.forum}`
             );
             const docRef = await addDoc(folderRef, {
-                author: siteUser.handle,
+                authorUsername: siteUser.username,
+                authorUID: googleUser.uid,
                 topic: topic,
                 body: body,
+                replies: 0,
                 createdAt: Date.now(),
             });
-            navigate(`/posts/${params.category}/${params.forum}/${docRef.id}`);
+
+            navigate(`/forums/${params.category}/${params.forum}/${docRef.id}`);
         }
         setSubmitted(true);
     };
@@ -76,7 +80,7 @@ const CreatePost = () => {
                         <Divider />
                         <Grid container sx={{ margin: "2em 0" }}>
                             <Grid item xs={12} sm={2}>
-                                {siteUser.handle}
+                                {siteUser.username}
                             </Grid>
                             <Grid item xs={12} sm={10}>
                                 <TextareaAutosize
