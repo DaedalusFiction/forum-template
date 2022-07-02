@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Avatar,
     Container,
@@ -9,15 +9,20 @@ import {
     MenuItem,
     Tooltip,
     Typography,
+    TextField,
 } from "@mui/material";
+
+import Notification from "../components/Notification";
+import UpdateUsernameBox from "../components/UpdateUsernameBox";
 
 const Settings = () => {
     return (
-        <div>
-            <Container>
-                <Box></Box>
+        <Container>
+            <Typography variant="h1">Profile Settings</Typography>
+            <Container maxWidth="sm">
+                <UpdateUsernameBox />
             </Container>
-        </div>
+        </Container>
     );
 };
 export default Settings;

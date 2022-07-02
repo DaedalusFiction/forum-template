@@ -53,14 +53,30 @@ const Forum = () => {
                         >
                             Topic
                         </Typography>
-                        <Typography
+                        <Box
                             sx={{
-                                fontSize: "1rem",
-                                color: "var(--fc-primary-muted)",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                width: "10rem",
                             }}
                         >
-                            Author
-                        </Typography>
+                            <Typography
+                                sx={{
+                                    fontSize: "1rem",
+                                    color: "var(--fc-primary-muted)",
+                                }}
+                            >
+                                Author
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    fontSize: "1rem",
+                                    color: "var(--fc-primary-muted)",
+                                }}
+                            >
+                                Replies
+                            </Typography>
+                        </Box>
                     </Box>
                 )}
                 {posts &&

@@ -16,7 +16,10 @@ const Breadcrumb = () => {
             {values &&
                 values.map((value, index) => {
                     return (
-                        <Typography sx={{ textTransform: "capitalize" }}>
+                        <Typography
+                            key={index}
+                            sx={{ textTransform: "capitalize" }}
+                        >
                             <Link
                                 key={value}
                                 to={

@@ -31,9 +31,11 @@ export default function Notification({ message, open, setOpen }) {
         <div>
             <Snackbar
                 open={open}
-                autoHideDuration={6000}
+                autoHideDuration={3000}
                 onClose={handleClose}
-                message={<Typography color="secondary"> {message}</Typography>}
+                message={
+                    <Typography sx={{ color: "white" }}> {message}</Typography>
+                }
                 action={action}
                 sx={{
                     "& .MuiSnackbarContent-root": {

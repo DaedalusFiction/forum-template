@@ -17,7 +17,6 @@ import Notification from "../components/Notification";
 import Breadcrumb from "../components/Breadcrumb";
 
 const Post = () => {
-    const [open, setOpen] = useState(false);
     const params = useParams();
     const siteUser = useSelector(selectSiteUser);
     const post = useGetPost(params.category, params.forum, params.id);
@@ -97,9 +96,8 @@ const Post = () => {
                     replies.map((reply, index) => {
                         return <Reply key={index} reply={reply} />;
                     })}
-                <InputReply setOpen={setOpen} />
+                <InputReply />
             </Box>
-            <Notification open={open} setOpen={setOpen} message="Success!" />
         </Container>
     );
 };

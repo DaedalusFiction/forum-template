@@ -7,13 +7,11 @@ import {
     updateGoogleUser,
     selectGoogleUser,
     selectSiteUser,
-    selectHandle,
     updateSiteUser,
 } from "../features/user/userSlice";
 import {
     Avatar,
     Box,
-    Button,
     IconButton,
     Menu,
     MenuItem,
@@ -28,31 +26,38 @@ import {
 } from "firebase/auth";
 import { auth, db, provider } from "../firebase";
 
-const settings = ["Settings", "Logout"];
-
 const Profile = () => {
     const googleUser = useSelector(selectGoogleUser);
     const siteUser = useSelector(selectSiteUser);
-    const handle = useSelector(selectHandle);
     const dispatch = useDispatch();
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    // useEffect(() => {
-    //     const auth = getAuth();
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //             // User is signed in, see docs for a list of available properties
-    //             // https://firebase.google.com/docs/reference/js/firebase.User
-    //             const uid = user.uid;
-    //             // ...
-    //         } else {
-    //             // User is signed out
-    //             // ...
-    //         }
-    //     });
-    //     return () => {};
-    // }, []);
+    useEffect(() => {
+        const auth = getAuth();
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = user.uid;
+                const docRef = doc(db, "users", uid);
+                const userSnap = await getDoc(docRef);
+                dispatch(updateSiteUser(userSnap.data()));
+                const googleUser = {
+                    uid: user.uid,
+                    name: user.displayName,
+                    photoURL: user.photoURL,
+                };
+                dispatch(updateGoogleUser(googleUser));
+
+                // ...
+            } else {
+                // User is signed out
+                // ...
+            }
+        });
+        return () => {};
+    }, [dispatch]);
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -90,8 +95,9 @@ const Profile = () => {
                         } else {
                             //new user is created
                             const siteUser = {
-                                handle: "Unknown",
+                                username: "Anonymous",
                                 avatar: "rocket",
+                                lastPosted: Date.now(),
                             };
                             const docRef = await setDoc(
                                 doc(db, "users", googleUser.uid),
@@ -129,7 +135,11 @@ const Profile = () => {
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar>{siteUser ? siteUser.avatar : "A"}</Avatar>
+                    <Avatar>
+                        {siteUser
+                            ? siteUser.username.charAt(0).toUpperCase()
+                            : "A"}
+                    </Avatar>
                 </IconButton>
             </Tooltip>
             <Menu

@@ -14,6 +14,7 @@ import {
     startAfter,
     updateDoc,
     FieldValue,
+    increment,
 } from "firebase/firestore";
 
 import { useParams, useNavigate } from "react-router-dom";
@@ -29,14 +30,23 @@ import ReplyIcon from "@mui/icons-material/Reply";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import { selectSiteUser } from "../features/user/userSlice";
+import {
+    selectGoogleUser,
+    selectSiteUser,
+    updateSiteUser,
+} from "../features/user/userSlice";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { db } from "../firebase";
+import Notification from "./Notification";
 
-const InputReply = ({ setOpen }) => {
+const InputReply = () => {
+    const [open, setOpen] = useState(false);
     const [body, setBody] = useState("");
     const siteUser = useSelector(selectSiteUser);
+    const googleUser = useSelector(selectGoogleUser);
+
+    const dispatch = useDispatch();
     const params = useParams();
     const navigate = useNavigate();
 
@@ -50,25 +60,47 @@ const InputReply = ({ setOpen }) => {
             db,
             `forums/${params.category}/${params.forum}/${params.id}/replies`
         );
+        console.log(siteUser);
+
+        //make sure user can't post more than once every fifteen seconds
+        const currentTime = Date.now();
+        if (currentTime - siteUser.lastPosted < 15 * 1000) {
+            console.log("you're posting too often");
+            return;
+        }
         if (body !== "") {
             const uploadTask = await addDoc(collectionRef, {
-                author: siteUser.handle,
+                author: siteUser.username,
                 body: body,
-                createdAt: Date.now(),
+                createdAt: currentTime,
             });
-
+            const parentPostRef = doc(
+                db,
+                `forums/${params.category}/${params.forum}`,
+                params.id
+            );
+            const updateParemtPostTask = await updateDoc(parentPostRef, {
+                replies: increment(1),
+            });
+            const userRef = doc(db, "users", googleUser.uid);
+            const uploadTaskTwo = await updateDoc(userRef, {
+                lastPosted: currentTime,
+            });
+            let newSiteUser = JSON.parse(JSON.stringify(siteUser));
+            newSiteUser.lastPosted = currentTime;
+            dispatch(updateSiteUser(newSiteUser));
             setBody("");
             setOpen(true);
         }
     };
     return (
-        <Box sx={{ margin: "3em 0 3em 0" }}>
+        <Box sx={{ margin: "3em 0" }}>
             {siteUser && (
                 <Box>
                     <Divider />
                     <Grid container sx={{ margin: "2em 0" }}>
                         <Grid item xs={12} sm={2}>
-                            {siteUser.handle}
+                            {siteUser.username}
                         </Grid>
                         <Grid item xs={12} sm={10}>
                             <TextareaAutosize
@@ -89,6 +121,11 @@ const InputReply = ({ setOpen }) => {
                 </Box>
             )}
             {!siteUser && <Typography>Log in to leave a reply</Typography>}
+            <Notification
+                open={open}
+                setOpen={setOpen}
+                message="Reply posted"
+            />
         </Box>
     );
 };
