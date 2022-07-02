@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import useGetPost from "../hooks/useGetPost";
 import useGetReplies from "../hooks/useGetReplies";
 import { useParams } from "react-router-dom";
-import { Box, Container, Divider, Grid, Typography } from "@mui/material";
+import {
+    Box,
+    Button,
+    Container,
+    Divider,
+    Grid,
+    TextareaAutosize,
+    Typography,
+} from "@mui/material";
 import ReplyIcon from "@mui/icons-material/Reply";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -16,6 +24,8 @@ import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 import { useSelector } from "react-redux";
 import Notification from "../components/Notification";
 import Breadcrumb from "../components/Breadcrumb";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const Post = () => {
     const params = useParams();
@@ -23,6 +33,27 @@ const Post = () => {
     const googleUser = useSelector(selectGoogleUser);
     const post = useGetPost(params.category, params.forum, params.id);
     const replies = useGetReplies(params.category, params.forum, params.id);
+    const [isEditing, setIsEditing] = useState(false);
+    const [body, setBody] = useState("");
+
+    const handleBodyChange = (e) => {
+        setBody(e.target.value);
+    };
+
+    const handleEditIconClick = (e) => {
+        setBody(post.data().body);
+        setIsEditing(true);
+    };
+
+    const handleConfirmEdit = async () => {
+        console.log("test");
+        const docRef = doc(
+            db,
+            `forums/${params.category}/${params.forum}/${params.id}`
+        );
+        const updateTask = await updateDoc(docRef, { body: body });
+        setIsEditing(false);
+    };
 
     return (
         <Container maxWidth="lg">
@@ -49,15 +80,29 @@ const Post = () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} sm={9.5}>
-                                <Typography
-                                    sx={{
-                                        marginBottom: "2em",
-                                        maxWidth: "75ch",
-                                        whiteSpace: "pre-wrap",
-                                    }}
-                                >
-                                    {post.data().body}
-                                </Typography>
+                                {isEditing ? (
+                                    <TextareaAutosize
+                                        value={body}
+                                        onChange={handleBodyChange}
+                                        aria-label="body-reply"
+                                        minRows={6}
+                                        style={{
+                                            width: "100%",
+                                            padding: "1em",
+                                            whiteSpace: "pre-wrap",
+                                        }}
+                                    />
+                                ) : (
+                                    <Typography
+                                        sx={{
+                                            marginBottom: "2em",
+                                            maxWidth: "75ch",
+                                            whiteSpace: "pre-wrap",
+                                        }}
+                                    >
+                                        {post.data().body}
+                                    </Typography>
+                                )}
                                 <Box
                                     sx={{
                                         display: "flex",
@@ -66,12 +111,27 @@ const Post = () => {
                                         marginBottom: "1em",
                                     }}
                                 >
+                                    {isEditing && (
+                                        <Button onClick={handleConfirmEdit}>
+                                            Confirm
+                                        </Button>
+                                    )}
+                                    {!isEditing &&
+                                        googleUser &&
+                                        post.data().authorUID ===
+                                            googleUser.uid && (
+                                            <EditIcon
+                                                style={{ cursor: "pointer" }}
+                                                onClick={handleEditIconClick}
+                                            />
+                                        )}
                                     {googleUser &&
                                         post.data().authorUID ===
-                                            googleUser.uid && <EditIcon />}
-                                    {googleUser &&
-                                        post.data().authorUID ===
-                                            googleUser.uid && <DeleteIcon />}
+                                            googleUser.uid && (
+                                            <DeleteIcon
+                                                style={{ cursor: "pointer" }}
+                                            />
+                                        )}
                                 </Box>
                                 <Divider sx={{ marginBottom: "1em" }} />
                                 <Typography
