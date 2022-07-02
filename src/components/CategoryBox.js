@@ -32,7 +32,7 @@ const CategoryBox = ({ category }) => {
                     {category.description}
                 </Typography>
             </Link>
-            <Grid container>
+            <Grid container spacing={2}>
                 {category.subcategories.map((subcategory) => {
                     return (
                         <Grid key={subcategory} item xs={6}>

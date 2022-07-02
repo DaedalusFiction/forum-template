@@ -164,7 +164,7 @@ const Profile = () => {
                     </MenuItem>
                 )}
                 {googleUser && (
-                    <Link to="settings">
+                    <Link to="settings" onClick={handleMenuClick}>
                         <MenuItem>
                             <Typography
                                 textAlign="center"

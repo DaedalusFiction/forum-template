@@ -11,7 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Reply from "../components/Reply";
 import InputReply from "../components/InputReply";
-import { selectSiteUser } from "../features/user/userSlice";
+import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 
 import { useSelector } from "react-redux";
 import Notification from "../components/Notification";
@@ -20,6 +20,7 @@ import Breadcrumb from "../components/Breadcrumb";
 const Post = () => {
     const params = useParams();
     const siteUser = useSelector(selectSiteUser);
+    const googleUser = useSelector(selectGoogleUser);
     const post = useGetPost(params.category, params.forum, params.id);
     const replies = useGetReplies(params.category, params.forum, params.id);
 
@@ -41,17 +42,18 @@ const Post = () => {
                             {params.category}
                         </Typography>
                         <Divider />
-                        <Grid container spacing={2} sx={{ margin: "2em 0" }}>
-                            <Grid item xs={12} sm={2}>
+                        <Grid container sx={{ margin: "2em 0" }}>
+                            <Grid item xs={12} sm={2.5}>
                                 <Typography sx={{ fontWeight: "bold" }}>
                                     {post.data().authorUsername}:
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12} sm={10}>
+                            <Grid item xs={12} sm={9.5}>
                                 <Typography
                                     sx={{
                                         marginBottom: "2em",
                                         maxWidth: "75ch",
+                                        whiteSpace: "pre-wrap",
                                     }}
                                 >
                                     {post.data().body}
@@ -64,10 +66,12 @@ const Post = () => {
                                         marginBottom: "1em",
                                     }}
                                 >
-                                    {post.data().authorUsername ===
-                                        siteUser.username && <EditIcon />}
-                                    {post.data().authorUsername ===
-                                        siteUser.username && <DeleteIcon />}
+                                    {googleUser &&
+                                        post.data().authorUID ===
+                                            googleUser.uid && <EditIcon />}
+                                    {googleUser &&
+                                        post.data().authorUID ===
+                                            googleUser.uid && <DeleteIcon />}
                                 </Box>
                                 <Divider sx={{ marginBottom: "1em" }} />
                                 <Typography

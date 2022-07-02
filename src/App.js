@@ -28,12 +28,13 @@ const theme = createTheme({
         fontFamily: "var(--ff-primary)",
         color: "var(--fc-primary)",
         h1: {
-            fontSize: "5rem",
+            fontSize: "clamp(3rem, 5vw, 10.5rem)",
             fontFamily: "var(--ff-secondary)",
             fontWeight: "bold",
         },
         h2: {
-            fontSize: "3rem",
+            fontSize: "clamp(2.25rem, 3vw, 10.5rem)",
+
             fontFamily: "var(--ff-secondary)",
         },
 
@@ -41,6 +42,7 @@ const theme = createTheme({
             fontSize: "1.2rem",
         },
         h6: {
+            lineHeight: "1.25rem",
             fontSize: "1.2rem",
         },
     },
