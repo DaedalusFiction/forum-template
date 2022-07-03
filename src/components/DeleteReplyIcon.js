@@ -11,9 +11,10 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
+    Tooltip,
 } from "@mui/material";
 
-const DeletePostIcon = ({ params, id }) => {
+const DeleteReplyIcon = ({ params, id }) => {
     const [open, setOpen] = useState(false);
     const handleYes = async () => {
         console.log("first");
@@ -35,10 +36,12 @@ const DeletePostIcon = ({ params, id }) => {
     };
     return (
         <Box>
-            <DeleteIcon
-                onClick={handleClickOpen}
-                style={{ cursor: "pointer" }}
-            />
+            <Tooltip title={"Delete"}>
+                <DeleteIcon
+                    onClick={handleClickOpen}
+                    style={{ cursor: "pointer" }}
+                />
+            </Tooltip>
             <Dialog
                 open={open}
                 onClose={handleNo}
@@ -62,4 +65,4 @@ const DeletePostIcon = ({ params, id }) => {
     );
 };
 
-export default DeletePostIcon;
+export default DeleteReplyIcon;

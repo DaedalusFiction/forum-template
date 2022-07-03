@@ -7,6 +7,7 @@ import {
     Divider,
     Grid,
     TextareaAutosize,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import ReplyIcon from "@mui/icons-material/Reply";
@@ -21,7 +22,7 @@ import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 import { doc, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-import DeletePostIcon from "./DeletePostIcon";
+import DeleteReplyIcon from "./DeleteReplyIcon";
 
 const Reply = ({ reply }) => {
     const params = useParams();
@@ -129,14 +130,19 @@ const Reply = ({ reply }) => {
                         {!isEditing &&
                             googleUser &&
                             reply.data().authorUID === googleUser.uid && (
-                                <EditIcon
-                                    style={{ cursor: "pointer" }}
-                                    onClick={handleEditIconClick}
-                                />
+                                <Tooltip title="Edit">
+                                    <EditIcon
+                                        style={{ cursor: "pointer" }}
+                                        onClick={handleEditIconClick}
+                                    />
+                                </Tooltip>
                             )}
                         {googleUser &&
                             reply.data().authorUID === googleUser.uid && (
-                                <DeletePostIcon id={reply.id} params={params} />
+                                <DeleteReplyIcon
+                                    id={reply.id}
+                                    params={params}
+                                />
                             )}
                     </Box>
                     <Divider sx={{ marginBottom: "1em" }} />

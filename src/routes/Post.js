@@ -9,6 +9,7 @@ import {
     Divider,
     Grid,
     TextareaAutosize,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import ReplyIcon from "@mui/icons-material/Reply";
@@ -157,18 +158,16 @@ const Post = () => {
                                         googleUser &&
                                         post.data().authorUID ===
                                             googleUser.uid && (
-                                            <EditIcon
-                                                style={{ cursor: "pointer" }}
-                                                onClick={handleEditIconClick}
-                                            />
-                                        )}
-                                    {googleUser &&
-                                        post.data().authorUID ===
-                                            googleUser.uid && (
-                                            <DeleteIcon
-                                                onClick={handleDeleteIconClick}
-                                                style={{ cursor: "pointer" }}
-                                            />
+                                            <Tooltip title="Edit">
+                                                <EditIcon
+                                                    style={{
+                                                        cursor: "pointer",
+                                                    }}
+                                                    onClick={
+                                                        handleEditIconClick
+                                                    }
+                                                />
+                                            </Tooltip>
                                         )}
                                 </Box>
                                 <Divider sx={{ marginBottom: "1em" }} />
