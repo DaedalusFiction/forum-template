@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,19 +6,17 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useLocation } from "react-router-dom";
 import Profile from "../components/Profile.js";
+import { useState } from "react";
 
-const pages = ["Forums", "Two", "Three"];
+const pages = ["forums", "two", "three"];
 
 const Header = () => {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const pathArray = window.location.pathname.split("/");
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const location = useLocation();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -130,8 +127,8 @@ const Header = () => {
                                     sx={{
                                         my: 2,
                                         color:
-                                            pathArray[1] ===
-                                            `${page.toLowerCase()}`
+                                            location.pathname.split("/")[1] ===
+                                            `${page}`
                                                 ? "white"
                                                 : "var(--fc-secondary-muted)",
                                         display: "block",

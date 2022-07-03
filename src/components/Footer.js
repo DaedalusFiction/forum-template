@@ -35,7 +35,10 @@ const Footer = () => {
                     <Box>
                         <Typography
                             variant="h6"
-                            sx={{ color: "white", marginBottom: "1em" }}
+                            sx={{
+                                color: "var(--fc-secondary-muted)",
+                                marginBottom: "1em",
+                            }}
                         >
                             THE FORUMS
                         </Typography>
@@ -49,8 +52,8 @@ const Footer = () => {
                                 >
                                     <Typography
                                         sx={{
-                                            color: "var(--fc-secondary-muted)",
-                                            fontSize: ".8rem",
+                                            color: "white",
+                                            fontSize: "1rem",
                                             "&:hover": { color: "white" },
                                         }}
                                         gutterBottom
