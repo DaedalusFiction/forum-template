@@ -37,7 +37,7 @@ const Footer = () => {
                             variant="h6"
                             sx={{ color: "white", marginBottom: "1em" }}
                         >
-                            Forum Website
+                            THE FORUMS
                         </Typography>
                         {links.map((item, index) => {
                             return (

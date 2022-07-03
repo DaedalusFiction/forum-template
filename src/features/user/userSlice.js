@@ -4,7 +4,6 @@ import { fetchCount } from "../counter/counterAPI";
 const initialState = {
     googleUser: null,
     siteUser: null,
-    handle: "Jeff",
 };
 
 // The function below is called a thunk and allows us to perform async logic. It

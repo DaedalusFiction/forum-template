@@ -41,11 +41,12 @@ const Header = () => {
                             display: {
                                 xs: "none",
                                 md: "flex",
+                                marginRight: "2em",
                             },
                         }}
                     >
                         <Link to="/">
-                            <Typography>LOGO</Typography>
+                            <Typography>THE FORUMS</Typography>
                         </Link>
                     </Box>
 
@@ -110,7 +111,7 @@ const Header = () => {
                         }}
                     >
                         <Link to="/">
-                            <Typography>LOGO</Typography>
+                            <Typography>THE FORUMS</Typography>
                         </Link>
                     </Box>
                     <Box

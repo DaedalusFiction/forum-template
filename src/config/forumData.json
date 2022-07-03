@@ -11,9 +11,15 @@
             "subcategories": ["first", "second", "third"]
         },
         {
-            "name": "announcements",
-            "description": "General Discussion",
-            "subcategories": ["first", "second"]
+            "name": "Emma's Place",
+            "description": "Emma's Forums",
+            "subcategories": [
+                "Horse RPG",
+                "Recipes",
+                "Skin Care Products",
+                "Early Childhood Development",
+                "Interior Decorating for the Hippie-adjacent"
+            ]
         },
         {
             "name": "news",

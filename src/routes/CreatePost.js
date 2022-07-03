@@ -32,11 +32,13 @@ import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 
 import { useSelector } from "react-redux";
 import { db } from "../firebase";
+import Breadcrumb from "../components/Breadcrumb";
 
 const CreatePost = () => {
     const [topic, setTopic] = useState("");
     const [body, setBody] = useState("");
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState("");
     const siteUser = useSelector(selectSiteUser);
     const googleUser = useSelector(selectGoogleUser);
     const params = useParams();
@@ -51,6 +53,13 @@ const CreatePost = () => {
 
     const handleSubmitPost = async (e) => {
         e.preventDefault();
+        const currentTime = Date.now();
+        if (currentTime - siteUser.lastPosted < 15 * 1000) {
+            setError(
+                "You're posting too often. Please try again in a few seconds."
+            );
+            return;
+        }
         if (!submitted) {
             const folderRef = collection(
                 db,
@@ -63,15 +72,18 @@ const CreatePost = () => {
                 body: body,
                 replies: 0,
                 createdAt: Date.now(),
+                lastUpdated: Date.now(),
             });
 
             navigate(`/forums/${params.category}/${params.forum}/${docRef.id}`);
         }
         setSubmitted(true);
+        setError("");
     };
     return (
         <Container>
             <Box>
+                <Breadcrumb />
                 <Typography variant="h1" sx={{ fontSize: "3rem" }}>
                     Create a Post
                 </Typography>
@@ -97,6 +109,22 @@ const CreatePost = () => {
                                     placeholder="Write something pleasant..."
                                     style={{ width: "100%", padding: "1em" }}
                                 />
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <Typography>{error}</Typography>
+                                    <Typography
+                                        sx={{
+                                            color: "var(--fc-primary-muted)",
+                                        }}
+                                    >
+                                        {body.length}
+                                        {" / "}5000
+                                    </Typography>
+                                </Box>
                             </Grid>
                         </Grid>
                         <Box sx={{ display: "flex", justifyContent: "end" }}>

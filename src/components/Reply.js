@@ -21,6 +21,7 @@ import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 import { doc, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
+import DeletePostIcon from "./DeletePostIcon";
 
 const Reply = ({ reply }) => {
     const params = useParams();
@@ -28,8 +29,12 @@ const Reply = ({ reply }) => {
     const googleUser = useSelector(selectGoogleUser);
     const [isEditing, setIsEditing] = useState(false);
     const [body, setBody] = useState("");
+    const [error, setError] = useState("");
 
     const handleBodyChange = (e) => {
+        if (e.target.value.length > 5000) {
+            return;
+        }
         setBody(e.target.value);
     };
 
@@ -38,15 +43,22 @@ const Reply = ({ reply }) => {
         setIsEditing(true);
     };
 
+    const handleCloseEdit = () => {
+        setIsEditing(false);
+    };
+
     const handleConfirmEdit = async () => {
-        console.log("test");
         const docRef = doc(
             db,
             `forums/${params.category}/${params.forum}/${params.id}/replies/${reply.id}`
         );
-        const updateTask = await updateDoc(docRef, { body: body });
+        const updateTask = await updateDoc(docRef, {
+            body: body,
+            lastUpdated: Date.now(),
+        });
         setIsEditing(false);
     };
+
     return (
         <Box sx={{ margin: "3em 0 3em 0" }}>
             <Divider />
@@ -58,17 +70,35 @@ const Reply = ({ reply }) => {
                 </Grid>
                 <Grid item xs={12} sm={9.5}>
                     {isEditing ? (
-                        <TextareaAutosize
-                            value={body}
-                            onChange={handleBodyChange}
-                            aria-label="body-reply"
-                            minRows={6}
-                            style={{
-                                width: "100%",
-                                padding: "1em",
-                                whiteSpace: "pre-wrap",
-                            }}
-                        />
+                        <Box>
+                            <TextareaAutosize
+                                value={body}
+                                onChange={handleBodyChange}
+                                aria-label="body-reply"
+                                minRows={6}
+                                style={{
+                                    width: "100%",
+                                    padding: "1em",
+                                    whiteSpace: "pre-wrap",
+                                }}
+                            />
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Typography>{error}</Typography>
+                                <Typography
+                                    sx={{
+                                        color: "var(--fc-primary-muted)",
+                                    }}
+                                >
+                                    {body.length}
+                                    {" / "}5000
+                                </Typography>
+                            </Box>
+                        </Box>
                     ) : (
                         <Typography
                             sx={{
@@ -89,7 +119,12 @@ const Reply = ({ reply }) => {
                         }}
                     >
                         {isEditing && (
-                            <Button onClick={handleConfirmEdit}>Confirm</Button>
+                            <>
+                                <Button onClick={handleConfirmEdit}>
+                                    Confirm
+                                </Button>
+                                <Button onClick={handleCloseEdit}>Close</Button>
+                            </>
                         )}
                         {!isEditing &&
                             googleUser &&
@@ -101,7 +136,7 @@ const Reply = ({ reply }) => {
                             )}
                         {googleUser &&
                             reply.data().authorUID === googleUser.uid && (
-                                <DeleteIcon style={{ cursor: "pointer" }} />
+                                <DeletePostIcon id={reply.id} params={params} />
                             )}
                     </Box>
                     <Divider sx={{ marginBottom: "1em" }} />
@@ -111,18 +146,19 @@ const Reply = ({ reply }) => {
                             fontSize: ".75rem",
                         }}
                     >
-                        Last updated:{" "}
-                        {reply.data().createdAt &&
-                            new Date(reply.data().createdAt).toLocaleDateString(
-                                "en-us",
-                                {
-                                    weekday: "short",
-                                    month: "short",
-                                    day: "numeric",
-                                    hour: "numeric",
-                                    minute: "numeric",
-                                }
-                            )}
+                        {reply.data().lastUpdated === reply.data().createdAt
+                            ? "Created: "
+                            : "Edited: "}
+                        {reply.data().lastUpdated &&
+                            new Date(
+                                reply.data().lastUpdated
+                            ).toLocaleDateString("en-us", {
+                                weekday: "short",
+                                month: "short",
+                                day: "numeric",
+                                hour: "numeric",
+                                minute: "numeric",
+                            })}
                     </Typography>
                 </Grid>
             </Grid>

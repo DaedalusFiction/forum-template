@@ -43,6 +43,7 @@ import Notification from "./Notification";
 const InputReply = () => {
     const [open, setOpen] = useState(false);
     const [body, setBody] = useState("");
+    const [error, setError] = useState("");
     const siteUser = useSelector(selectSiteUser);
     const googleUser = useSelector(selectGoogleUser);
 
@@ -51,6 +52,9 @@ const InputReply = () => {
     const navigate = useNavigate();
 
     const handleBodyChange = (e) => {
+        if (e.target.value.length > 5000) {
+            return;
+        }
         setBody(e.target.value);
     };
 
@@ -60,12 +64,13 @@ const InputReply = () => {
             db,
             `forums/${params.category}/${params.forum}/${params.id}/replies`
         );
-        console.log(siteUser);
 
         //make sure user can't post more than once every fifteen seconds
         const currentTime = Date.now();
         if (currentTime - siteUser.lastPosted < 15 * 1000) {
-            console.log("you're posting too often");
+            setError(
+                "You're posting too often. Please try again in a few seconds."
+            );
             return;
         }
         if (body !== "") {
@@ -74,6 +79,7 @@ const InputReply = () => {
                 authorUID: googleUser.uid,
                 body: body,
                 createdAt: currentTime,
+                lastUpdated: Date.now(),
             });
             const parentPostRef = doc(
                 db,
@@ -92,6 +98,7 @@ const InputReply = () => {
             dispatch(updateSiteUser(newSiteUser));
             setBody("");
             setOpen(true);
+            setError("");
         }
     };
     return (
@@ -112,6 +119,22 @@ const InputReply = () => {
                                 placeholder="Write something pleasant..."
                                 style={{ width: "100%", padding: "1em" }}
                             />
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Typography>{error}</Typography>
+                                <Typography
+                                    sx={{
+                                        color: "var(--fc-primary-muted)",
+                                    }}
+                                >
+                                    {body.length}
+                                    {" / "}5000
+                                </Typography>
+                            </Box>
                         </Grid>
                     </Grid>
                     <Box sx={{ display: "flex", justifyContent: "end" }}>

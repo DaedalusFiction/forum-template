@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Layout from "./routes/Layout";
 import Home from "./routes/Home";
@@ -28,7 +28,7 @@ const theme = createTheme({
         fontFamily: "var(--ff-primary)",
         color: "var(--fc-primary)",
         h1: {
-            fontSize: "clamp(3rem, 5vw, 10.5rem)",
+            fontSize: "clamp(3rem, 4vw, 10.5rem)",
             fontFamily: "var(--ff-secondary)",
             fontWeight: "bold",
         },
@@ -57,6 +57,10 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="forums" element={<Forums />} />
+                        <Route
+                            path="/create-post"
+                            element={<Navigate replace to="/forums" />}
+                        />
 
                         <Route
                             path="/create-post/:category/:forum"

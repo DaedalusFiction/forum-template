@@ -37,6 +37,9 @@ const Post = () => {
     const [body, setBody] = useState("");
 
     const handleBodyChange = (e) => {
+        if (e.target.value.length > 5000) {
+            return;
+        }
         setBody(e.target.value);
     };
 
@@ -47,11 +50,23 @@ const Post = () => {
 
     const handleConfirmEdit = async () => {
         console.log("test");
+
         const docRef = doc(
             db,
             `forums/${params.category}/${params.forum}/${params.id}`
         );
-        const updateTask = await updateDoc(docRef, { body: body });
+        const updateTask = await updateDoc(docRef, {
+            body: body,
+            lastUpdated: Date.now(),
+        });
+        setIsEditing(false);
+    };
+
+    const handleDeleteIconClick = () => {
+        console.log("test");
+    };
+
+    const handleCloseEdit = () => {
         setIsEditing(false);
     };
 
@@ -70,7 +85,7 @@ const Post = () => {
                                 marginBottom: "2em",
                             }}
                         >
-                            {params.category}
+                            {params.forum}
                         </Typography>
                         <Divider />
                         <Grid container sx={{ margin: "2em 0" }}>
@@ -81,17 +96,34 @@ const Post = () => {
                             </Grid>
                             <Grid item xs={12} sm={9.5}>
                                 {isEditing ? (
-                                    <TextareaAutosize
-                                        value={body}
-                                        onChange={handleBodyChange}
-                                        aria-label="body-reply"
-                                        minRows={6}
-                                        style={{
-                                            width: "100%",
-                                            padding: "1em",
-                                            whiteSpace: "pre-wrap",
-                                        }}
-                                    />
+                                    <Box>
+                                        <TextareaAutosize
+                                            value={body}
+                                            onChange={handleBodyChange}
+                                            aria-label="body-reply"
+                                            minRows={6}
+                                            style={{
+                                                width: "100%",
+                                                padding: "1em",
+                                                whiteSpace: "pre-wrap",
+                                            }}
+                                        />
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                justifyContent: "end",
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    color: "var(--fc-primary-muted)",
+                                                }}
+                                            >
+                                                {body.length}
+                                                {" / "}5000
+                                            </Typography>
+                                        </Box>
+                                    </Box>
                                 ) : (
                                     <Typography
                                         sx={{
@@ -112,9 +144,14 @@ const Post = () => {
                                     }}
                                 >
                                     {isEditing && (
-                                        <Button onClick={handleConfirmEdit}>
-                                            Confirm
-                                        </Button>
+                                        <>
+                                            <Button onClick={handleConfirmEdit}>
+                                                Confirm
+                                            </Button>
+                                            <Button onClick={handleCloseEdit}>
+                                                Close
+                                            </Button>
+                                        </>
                                     )}
                                     {!isEditing &&
                                         googleUser &&
@@ -129,6 +166,7 @@ const Post = () => {
                                         post.data().authorUID ===
                                             googleUser.uid && (
                                             <DeleteIcon
+                                                onClick={handleDeleteIconClick}
                                                 style={{ cursor: "pointer" }}
                                             />
                                         )}
@@ -140,10 +178,13 @@ const Post = () => {
                                         fontSize: ".75rem",
                                     }}
                                 >
-                                    Last updated:{" "}
-                                    {post.data().createdAt &&
+                                    {post.data().lastUpdated ===
+                                    post.data().createdAt
+                                        ? "Created: "
+                                        : "Edited: "}
+                                    {post.data().lastUpdated &&
                                         new Date(
-                                            post.data().createdAt
+                                            post.data().lastUpdated
                                         ).toLocaleDateString("en-us", {
                                             weekday: "short",
                                             month: "short",

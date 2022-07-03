@@ -52,7 +52,8 @@ const Profile = () => {
 
                 // ...
             } else {
-                // User is signed out
+                dispatch(updateGoogleUser(null));
+                dispatch(updateSiteUser(null));
                 // ...
             }
         });

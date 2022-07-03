@@ -94,12 +94,12 @@ const Settings = () => {
                 <Button variant="contained" onClick={verifyUsername}>
                     Update
                 </Button>
-                <Notification
-                    open={usernameNotificationOpen}
-                    setOpen={setUsernameNotificationOpen}
-                    message="Username Updated!"
-                />
             </Box>
+            <Notification
+                open={usernameNotificationOpen}
+                setOpen={setUsernameNotificationOpen}
+                message="Username Updated!"
+            />
             {usernameError && <Typography>{usernameError}</Typography>}
         </Box>
     );
