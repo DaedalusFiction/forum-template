@@ -21,6 +21,7 @@ const Forum = () => {
                         gap: "1em",
                         justifyContent: "space-between",
                         alignItems: "center",
+                        marginBottom: "3rem",
                     }}
                 >
                     <Typography
@@ -43,6 +44,7 @@ const Forum = () => {
                             display: "flex",
                             justifyContent: "space-between",
                             marginBottom: ".5em",
+                            padding: "0 1em",
                         }}
                     >
                         <Typography

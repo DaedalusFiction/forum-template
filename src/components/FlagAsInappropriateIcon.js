@@ -16,9 +16,12 @@ import {
 
 const FlagAsInappropriateIcon = ({ forum, id, flaggedBy }) => {
     const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
     const handleYes = async () => {
-        console.log("forum: " + forum);
-        console.log("username: " + flaggedBy);
         setOpen(false);
         const inappropriatePost = {
             flaggedBy: flaggedBy,
@@ -30,13 +33,11 @@ const FlagAsInappropriateIcon = ({ forum, id, flaggedBy }) => {
             inappropriatePost
         );
     };
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const handleNo = () => {
         setOpen(false);
     };
+
     return (
         <Box>
             <Tooltip title={"Flag as Inappropriate"}>

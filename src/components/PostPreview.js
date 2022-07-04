@@ -16,8 +16,9 @@ const PostPreview = ({ post }) => {
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        padding: ".75em 0",
+                        padding: ".75em 1em",
                         borderTop: "1px solid var(--border-light)",
+                        background: "var(--bg-light)",
                         "&:hover": {
                             background: "white",
                         },

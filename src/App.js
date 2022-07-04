@@ -16,7 +16,7 @@ import Admin from "./routes/Admin";
 const theme = createTheme({
     palette: {
         background: {
-            default: "rgb(250, 250, 250)",
+            default: "var(--bg-primary)",
         },
         primary: {
             main: "#2F9C95",

@@ -17,7 +17,10 @@ const Category = () => {
             <Breadcrumb />
             {/* <Button onClick={handleTest}>test</Button> */}
             <Box>
-                <Typography variant="h1" sx={{ textTransform: "capitalize" }}>
+                <Typography
+                    variant="h1"
+                    sx={{ textTransform: "capitalize", marginBottom: "1em" }}
+                >
                     {params.category}
                 </Typography>
             </Box>
