@@ -20,6 +20,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Reply from "../components/Reply";
 import InputReply from "../components/InputReply";
+import FlagAsInappropriateIcon from "../components/FlagAsInappropriateIcon";
 import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 
 import { useSelector } from "react-redux";
@@ -154,6 +155,15 @@ const Post = () => {
                                             </Button>
                                         </>
                                     )}
+                                    {googleUser &&
+                                        post.data().authorUID !==
+                                            googleUser.uid && (
+                                            <FlagAsInappropriateIcon
+                                                id={post.id}
+                                                flaggedBy={siteUser.username}
+                                                forum={params.forum}
+                                            />
+                                        )}
                                     {!isEditing &&
                                         googleUser &&
                                         post.data().authorUID ===

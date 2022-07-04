@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteDoc, doc } from "firebase/firestore";
+import FlagIcon from "@mui/icons-material/Flag";
+import { addDoc, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import {
     Box,
@@ -14,12 +14,20 @@ import {
     Tooltip,
 } from "@mui/material";
 
-const DeleteReplyIcon = ({ category, forum, parentId, id }) => {
+const FlagAsInappropriateIcon = ({ forum, id, flaggedBy }) => {
     const [open, setOpen] = useState(false);
     const handleYes = async () => {
+        console.log("forum: " + forum);
+        console.log("username: " + flaggedBy);
         setOpen(false);
-        await deleteDoc(
-            doc(db, `forums/${category}/${forum}/${parentId}/replies/`, id)
+        const inappropriatePost = {
+            flaggedBy: flaggedBy,
+            forum: forum,
+            flaggedAt: Date.now(),
+        };
+        const docRef = await setDoc(
+            doc(db, "flaggedPosts", id),
+            inappropriatePost
         );
     };
     const handleClickOpen = () => {
@@ -31,8 +39,8 @@ const DeleteReplyIcon = ({ category, forum, parentId, id }) => {
     };
     return (
         <Box>
-            <Tooltip title={"Delete"}>
-                <DeleteIcon
+            <Tooltip title={"Flag as Inappropriate"}>
+                <FlagIcon
                     onClick={handleClickOpen}
                     style={{ cursor: "pointer" }}
                 />
@@ -60,4 +68,4 @@ const DeleteReplyIcon = ({ category, forum, parentId, id }) => {
     );
 };
 
-export default DeleteReplyIcon;
+export default FlagAsInappropriateIcon;

@@ -122,10 +122,9 @@ const Header = () => {
                     >
                         {pages.map((page, index) => (
                             <Link key={page} to={page.toLowerCase()}>
-                                <Button
-                                    onClick={handleCloseNavMenu}
+                                <Typography
                                     sx={{
-                                        my: 2,
+                                        margin: "0 1em",
                                         color:
                                             location.pathname.split("/")[1] ===
                                             `${page}`
@@ -135,10 +134,11 @@ const Header = () => {
                                         "&:hover": {
                                             color: "white",
                                         },
+                                        textTransform: "uppercase",
                                     }}
                                 >
                                     {page}
-                                </Button>
+                                </Typography>
                             </Link>
                         ))}
                     </Box>

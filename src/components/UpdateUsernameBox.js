@@ -45,7 +45,7 @@ const Settings = () => {
     };
     const verifyUsername = async (e) => {
         if (username.length < 8 || username.length > 12) {
-            setUsernameError("Username must be between 8 and 12");
+            setUsernameError("Username must be between 8 and 12 characters");
             return;
         }
         if (username.includes(" ")) {
@@ -72,7 +72,6 @@ const Settings = () => {
         dispatch(updateSiteUser(newSiteUser));
         setUsernameNotificationOpen(true);
         setUsername("");
-        console.log(username);
     };
     return (
         <Box>
@@ -91,9 +90,7 @@ const Settings = () => {
                     onChange={handleUsernameChange}
                     error={usernameError}
                 />
-                <Button variant="contained" onClick={verifyUsername}>
-                    Update
-                </Button>
+                <Button onClick={verifyUsername}>Update</Button>
             </Box>
             <Notification
                 open={usernameNotificationOpen}

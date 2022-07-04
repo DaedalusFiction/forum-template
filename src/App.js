@@ -11,6 +11,7 @@ import Forum from "./routes/Forum";
 import Post from "./routes/Post";
 import CreatePost from "./routes/CreatePost";
 import Category from "./routes/Category";
+import Admin from "./routes/Admin";
 
 const theme = createTheme({
     palette: {
@@ -57,6 +58,7 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="forums" element={<Forums />} />
+                        <Route path="admin" element={<Admin />} />
                         <Route
                             path="/create-post"
                             element={<Navigate replace to="/forums" />}

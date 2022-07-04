@@ -15,6 +15,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
 import EditIcon from "@mui/icons-material/Edit";
 
+import FlagAsInappropriateIcon from "../components/FlagAsInappropriateIcon";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import { useSelector } from "react-redux";
@@ -127,6 +128,14 @@ const Reply = ({ reply }) => {
                                 <Button onClick={handleCloseEdit}>Close</Button>
                             </>
                         )}
+                        {googleUser &&
+                            reply.data().authorUID !== googleUser.uid && (
+                                <FlagAsInappropriateIcon
+                                    id={reply.id}
+                                    flaggedBy={siteUser.username}
+                                    forum={params.forum}
+                                />
+                            )}
                         {!isEditing &&
                             googleUser &&
                             reply.data().authorUID === googleUser.uid && (
@@ -141,7 +150,9 @@ const Reply = ({ reply }) => {
                             reply.data().authorUID === googleUser.uid && (
                                 <DeleteReplyIcon
                                     id={reply.id}
-                                    params={params}
+                                    category={params.category}
+                                    forum={params.forum}
+                                    parentId={params.id}
                                 />
                             )}
                     </Box>
