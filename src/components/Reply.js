@@ -71,7 +71,7 @@ const Reply = ({ reply }) => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={9.5}>
-                    {isEditing ? (
+                    {reply.data().isEditable && isEditing ? (
                         <Box>
                             <TextareaAutosize
                                 value={body}
@@ -135,6 +135,7 @@ const Reply = ({ reply }) => {
                                     flaggedBy={siteUser.username}
                                     forum={params.forum}
                                     body={reply.data().body}
+                                    isReply={true}
                                 />
                             )}
                         {!isEditing &&

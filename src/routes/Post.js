@@ -163,10 +163,12 @@ const Post = () => {
                                                 flaggedBy={siteUser.username}
                                                 forum={params.forum}
                                                 body={post.data().body}
+                                                isReply={false}
                                             />
                                         )}
                                     {!isEditing &&
                                         googleUser &&
+                                        post.data().isEditable &&
                                         post.data().authorUID ===
                                             googleUser.uid && (
                                             <Tooltip title="Edit">

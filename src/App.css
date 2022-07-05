@@ -7,17 +7,22 @@
 }
 
 :root {
+    /* background colors */
     --bg-light: rgb(250, 250, 250);
     --bg-primary: rgb(245, 245, 245);
     --bg-accent: #004b46;
-    --border-light: rgb(205, 204, 204);
+
+    /* font colors  */
     --fc-primary: rgb(78, 78, 78);
     --fc-primary-muted: rgb(121, 121, 121);
-    --fc-secondary: white;
+    --fc-secondary: rgb(245, 245, 245);
     --fc-secondary-muted: rgb(202, 202, 202);
 
+    /* font families */
     --ff-primary: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     --ff-secondary: Georgia, "Times New Roman", Times, serif;
+
+    --border-light: rgb(205, 204, 204);
 }
 
 a {

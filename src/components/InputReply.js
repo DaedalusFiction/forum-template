@@ -80,6 +80,7 @@ const InputReply = () => {
                 body: body,
                 createdAt: currentTime,
                 lastUpdated: Date.now(),
+                isEditable: true,
             });
             const parentPostRef = doc(
                 db,

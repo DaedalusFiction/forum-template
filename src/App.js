@@ -16,7 +16,7 @@ import Admin from "./routes/Admin";
 const theme = createTheme({
     palette: {
         background: {
-            default: "var(--bg-primary)",
+            default: "rgb(245, 245, 245)",
         },
         primary: {
             main: "#2F9C95",
@@ -45,6 +45,16 @@ const theme = createTheme({
         h6: {
             lineHeight: "1.25rem",
             fontSize: "1.2rem",
+        },
+    },
+    components: {
+        MuiTooltip: {
+            styleOverrides: {
+                tooltip: {
+                    backgroundColor: "var(--bg-accent)",
+                    color: "var(--fc-secondary)",
+                },
+            },
         },
     },
 });

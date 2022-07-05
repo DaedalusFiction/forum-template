@@ -31,6 +31,7 @@ import Notification from "../components/Notification";
 const Settings = () => {
     const [username, setUsername] = useState("");
     const [usernameError, setUsernameError] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
 
     const [usernameNotificationOpen, setUsernameNotificationOpen] =
         useState(false);
@@ -41,9 +42,13 @@ const Settings = () => {
     const dispatch = useDispatch();
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
-        setUsernameError(false);
+        setUsernameError("");
     };
     const verifyUsername = async (e) => {
+        if (!isUpdating) {
+            setIsUpdating(true);
+            return;
+        }
         if (username.length < 8 || username.length > 12) {
             setUsernameError("Username must be between 8 and 12 characters");
             return;
@@ -58,9 +63,10 @@ const Settings = () => {
             usersRef,
             where("username", "==", username)
         );
+        //check to see if name is taken
         const usernamesSnap = await getDocs(usernameQuery);
         if (usernamesSnap.docs.length > 0) {
-            setUsernameError(true);
+            setUsernameError("That username is already taken");
             return;
         }
         const userRef = doc(db, "users", googleUser.uid);
@@ -72,24 +78,26 @@ const Settings = () => {
         dispatch(updateSiteUser(newSiteUser));
         setUsernameNotificationOpen(true);
         setUsername("");
+        setIsUpdating(false);
     };
     return (
         <Box>
             <Box
                 sx={{
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: "end",
                     alignItems: "center",
                     gap: "1em",
+                    flexWrap: "wrap",
                 }}
             >
-                <TextField
-                    fullWidth
-                    label="Username"
-                    value={username}
-                    onChange={handleUsernameChange}
-                    error={usernameError}
-                />
+                {isUpdating && (
+                    <TextField
+                        label="Username"
+                        value={username}
+                        onChange={handleUsernameChange}
+                    />
+                )}
                 <Button onClick={verifyUsername}>Update</Button>
             </Box>
             <Notification

@@ -45,6 +45,7 @@ const Profile = () => {
                 dispatch(updateSiteUser(userSnap.data()));
                 const googleUser = {
                     uid: user.uid,
+                    email: user.email,
                     name: user.displayName,
                     photoURL: user.photoURL,
                 };
@@ -84,6 +85,7 @@ const Profile = () => {
                         const token = credential.accessToken;
                         const googleUser = {
                             uid: result.user.uid,
+                            email: result.user.email,
                             name: result.user.displayName,
                             photoURL: result.user.photoURL,
                         };
@@ -97,8 +99,8 @@ const Profile = () => {
                             //new user is created
                             const siteUser = {
                                 username: "Anonymous",
-                                avatar: "rocket",
                                 lastPosted: Date.now(),
+                                admin: false,
                             };
                             const docRef = await setDoc(
                                 doc(db, "users", googleUser.uid),

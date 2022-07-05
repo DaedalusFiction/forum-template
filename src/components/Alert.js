@@ -21,11 +21,7 @@ export default function Alert({ handleYes, text, open, setOpen }) {
 
     return (
         <div>
-            <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleClickOpen}
-            >
+            <Button color="secondary" onClick={handleClickOpen}>
                 {text}
             </Button>
             <Dialog

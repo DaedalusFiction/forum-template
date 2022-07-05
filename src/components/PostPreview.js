@@ -9,7 +9,12 @@ const PostPreview = ({ post }) => {
         "/forums/" + params.category + "/" + params.forum + "/" + post.id;
 
     return (
-        <Tooltip title={body.slice(0, 400) + "..."} followCursor>
+        <Tooltip
+            title={body.slice(0, 400) + "..."}
+            enterDelay={500}
+            enterNextDelay={500}
+            followCursor
+        >
             <Link to={postLocation}>
                 <Box
                     sx={{

@@ -73,6 +73,7 @@ const CreatePost = () => {
                 replies: 0,
                 createdAt: Date.now(),
                 lastUpdated: Date.now(),
+                isEditable: true,
             });
 
             navigate(`/forums/${params.category}/${params.forum}/${docRef.id}`);

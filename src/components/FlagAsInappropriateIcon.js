@@ -13,8 +13,10 @@ import {
     DialogTitle,
     Tooltip,
 } from "@mui/material";
+import { useParams } from "react-router-dom";
 
-const FlagAsInappropriateIcon = ({ forum, id, body, flaggedBy }) => {
+const FlagAsInappropriateIcon = ({ forum, id, body, flaggedBy, isReply }) => {
+    const params = useParams();
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -28,6 +30,8 @@ const FlagAsInappropriateIcon = ({ forum, id, body, flaggedBy }) => {
             forum: forum,
             body: body,
             flaggedAt: Date.now(),
+            location: `forums/` + Object.values(params).join("/"),
+            isReply: isReply,
         };
         const docRef = await setDoc(
             doc(db, "flaggedPosts", id),
