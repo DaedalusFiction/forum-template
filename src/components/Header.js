@@ -12,7 +12,7 @@ import { Link, useLocation } from "react-router-dom";
 import Profile from "../components/Profile.js";
 import { useState } from "react";
 
-const pages = ["forums", "two", "three"];
+const pages = ["forums"];
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);

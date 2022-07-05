@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import FlagIcon from "@mui/icons-material/Flag";
-import { addDoc, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import {
     Box,
@@ -14,7 +14,7 @@ import {
     Tooltip,
 } from "@mui/material";
 
-const FlagAsInappropriateIcon = ({ forum, id, flaggedBy }) => {
+const FlagAsInappropriateIcon = ({ forum, id, body, flaggedBy }) => {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -26,6 +26,7 @@ const FlagAsInappropriateIcon = ({ forum, id, flaggedBy }) => {
         const inappropriatePost = {
             flaggedBy: flaggedBy,
             forum: forum,
+            body: body,
             flaggedAt: Date.now(),
         };
         const docRef = await setDoc(
@@ -49,15 +50,20 @@ const FlagAsInappropriateIcon = ({ forum, id, flaggedBy }) => {
             <Dialog
                 open={open}
                 onClose={handleNo}
-                aria-labelledby="delete-post"
-                aria-describedby="delete-post-description"
+                aria-labelledby="flag-post"
+                aria-describedby="flag-post-description"
             >
-                <DialogTitle id="delete-post">
-                    {"Delete this post permanently?"}
+                <DialogTitle id="flag-post">
+                    {"flag this post as inappropriate?"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="delete-post-description">
-                        This action cannot be undone
+                    <DialogContentText id="flag-post-description">
+                        A post or comment may be considered inappropriate if:
+                        <br />
+                        1. It contains crude or offensive language.
+                        <br />
+                        2. It contains personal information about you or someone
+                        else
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

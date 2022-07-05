@@ -134,6 +134,7 @@ const Reply = ({ reply }) => {
                                     id={reply.id}
                                     flaggedBy={siteUser.username}
                                     forum={params.forum}
+                                    body={reply.data().body}
                                 />
                             )}
                         {!isEditing &&

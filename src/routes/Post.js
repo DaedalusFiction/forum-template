@@ -162,6 +162,7 @@ const Post = () => {
                                                 id={post.id}
                                                 flaggedBy={siteUser.username}
                                                 forum={params.forum}
+                                                body={post.data().body}
                                             />
                                         )}
                                     {!isEditing &&
