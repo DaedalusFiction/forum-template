@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
-function useGetPosts(category, forum, page) {
+function useGetPosts(category, forum, page, counter) {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function useGetPosts(category, forum, page) {
         }
 
         getPosts();
-    }, [forum, page, category]);
+    }, [forum, page, category, counter]);
     return [posts];
 }
 

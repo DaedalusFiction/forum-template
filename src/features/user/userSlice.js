@@ -4,6 +4,7 @@ import { fetchCount } from "../counter/counterAPI";
 const initialState = {
     googleUser: null,
     siteUser: null,
+    counter: 0,
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -28,9 +29,8 @@ export const userSlice = createSlice({
         updateSiteUser: (state, action) => {
             state.siteUser = action.payload;
         },
-
-        updateHandle: (state, action) => {
-            state.handle = action.payload;
+        updateCounter: (state, action) => {
+            state.counter += 1;
         },
     },
     // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -50,7 +50,7 @@ export const userSlice = createSlice({
 export const {
     updateGoogleUser,
     updateSiteUser,
-    updateHandle,
+    updateCounter,
     increment,
     decrement,
     incrementByAmount,
@@ -61,7 +61,7 @@ export const {
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectGoogleUser = (state) => state.user.googleUser;
 export const selectSiteUser = (state) => state.user.siteUser;
-export const selectHandle = (state) => state.user.handle;
+export const selectCounter = (state) => state.user.counter;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

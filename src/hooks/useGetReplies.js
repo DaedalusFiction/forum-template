@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
-function useGetReplies(category, forum, id) {
+function useGetReplies(category, forum, id, counter) {
     const [replies, setReplies] = useState(null);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ function useGetReplies(category, forum, id) {
         }
 
         getReplies();
-    }, [id, category, forum]);
+    }, [id, category, forum, counter]);
     return replies;
 }
 

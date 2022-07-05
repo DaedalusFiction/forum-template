@@ -31,8 +31,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlagIcon from "@mui/icons-material/Flag";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import {
+    selectCounter,
     selectGoogleUser,
     selectSiteUser,
+    updateCounter,
     updateSiteUser,
 } from "../features/user/userSlice";
 
@@ -46,6 +48,8 @@ const InputReply = () => {
     const [error, setError] = useState("");
     const siteUser = useSelector(selectSiteUser);
     const googleUser = useSelector(selectGoogleUser);
+
+    const counter = useSelector(selectCounter);
 
     const dispatch = useDispatch();
     const params = useParams();
@@ -97,6 +101,7 @@ const InputReply = () => {
             let newSiteUser = JSON.parse(JSON.stringify(siteUser));
             newSiteUser.lastPosted = currentTime;
             dispatch(updateSiteUser(newSiteUser));
+            dispatch(updateCounter());
             setBody("");
             setOpen(true);
             setError("");

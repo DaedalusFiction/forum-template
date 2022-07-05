@@ -1,21 +1,27 @@
 import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectSiteUser } from "../features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    selectCounter,
+    selectSiteUser,
+    updateCounter,
+} from "../features/user/userSlice";
 import { db } from "../firebase";
 import useGetFlaggedPosts from "../hooks/useGetFlaggedPosts";
 
 const Admin = () => {
-    const [posts] = useGetFlaggedPosts();
     const siteUser = useSelector(selectSiteUser);
+    const dispatch = useDispatch();
+    const counter = useSelector(selectCounter);
+    const [posts] = useGetFlaggedPosts(counter);
 
     const handleDelete = async (location, isReply, id) => {
         if (isReply) {
             const myPath = `${location}/replies`;
             console.log(myPath, id);
 
-            Promise.all([
+            await Promise.all([
                 deleteDoc(doc(db, myPath, id)),
                 deleteDoc(doc(db, "flaggedPosts", id)),
             ]);
@@ -24,7 +30,7 @@ const Admin = () => {
             myPath = myPath.splice(0, myPath.length - 1);
             myPath = myPath.join("/");
             console.log(myPath, id);
-            Promise.all([
+            await Promise.all([
                 updateDoc(doc(db, myPath, id), {
                     isEditable: false,
                     body: "[Post removed by moderator]",
@@ -32,6 +38,7 @@ const Admin = () => {
                 deleteDoc(doc(db, "flaggedPosts", id)),
             ]);
         }
+        dispatch(updateCounter());
     };
 
     return (

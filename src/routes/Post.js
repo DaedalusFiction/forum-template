@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useGetPost from "../hooks/useGetPost";
 import useGetReplies from "../hooks/useGetReplies";
 import { useParams } from "react-router-dom";
@@ -12,19 +12,17 @@ import {
     Tooltip,
     Typography,
 } from "@mui/material";
-import ReplyIcon from "@mui/icons-material/Reply";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FlagIcon from "@mui/icons-material/Flag";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Reply from "../components/Reply";
 import InputReply from "../components/InputReply";
 import FlagAsInappropriateIcon from "../components/FlagAsInappropriateIcon";
-import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
+import {
+    selectCounter,
+    selectGoogleUser,
+    selectSiteUser,
+} from "../features/user/userSlice";
 
 import { useSelector } from "react-redux";
-import Notification from "../components/Notification";
 import Breadcrumb from "../components/Breadcrumb";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -32,9 +30,15 @@ import { db } from "../firebase";
 const Post = () => {
     const params = useParams();
     const siteUser = useSelector(selectSiteUser);
+    const counter = useSelector(selectCounter);
     const googleUser = useSelector(selectGoogleUser);
-    const post = useGetPost(params.category, params.forum, params.id);
-    const replies = useGetReplies(params.category, params.forum, params.id);
+    const post = useGetPost(params.category, params.forum, params.id, counter);
+    const replies = useGetReplies(
+        params.category,
+        params.forum,
+        params.id,
+        counter
+    );
     const [isEditing, setIsEditing] = useState(false);
     const [body, setBody] = useState("");
 

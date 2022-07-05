@@ -5,10 +5,19 @@ import PostPreview from "../components/PostPreview";
 import useGetPosts from "../hooks/useGetPosts";
 import { Link } from "react-router-dom";
 import Breadcrumb from "../components/Breadcrumb";
+import { useSelector } from "react-redux";
+import { selectCounter } from "../features/user/userSlice";
 
 const Forum = () => {
     const params = useParams();
-    const [posts] = useGetPosts(params.category, params.forum, params.page);
+
+    const counter = useSelector(selectCounter);
+    const [posts] = useGetPosts(
+        params.category,
+        params.forum,
+        params.page,
+        counter
+    );
 
     return (
         <Container maxWidth="lg">

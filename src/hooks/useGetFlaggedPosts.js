@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
-function useGetFlaggedPosts() {
+function useGetFlaggedPosts(counter) {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ function useGetFlaggedPosts() {
         }
 
         getPosts();
-    }, []);
+    }, [counter]);
     return [posts];
 }
 
