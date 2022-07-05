@@ -20,9 +20,10 @@ import {
     selectCounter,
     selectGoogleUser,
     selectSiteUser,
+    updateCounter,
 } from "../features/user/userSlice";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Breadcrumb from "../components/Breadcrumb";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -33,6 +34,7 @@ const Post = () => {
     const counter = useSelector(selectCounter);
     const googleUser = useSelector(selectGoogleUser);
     const post = useGetPost(params.category, params.forum, params.id, counter);
+    const dispatch = useDispatch();
     const replies = useGetReplies(
         params.category,
         params.forum,
@@ -66,6 +68,7 @@ const Post = () => {
             lastUpdated: Date.now(),
         });
         setIsEditing(false);
+        dispatch(updateCounter());
     };
 
     const handleDeleteIconClick = () => {

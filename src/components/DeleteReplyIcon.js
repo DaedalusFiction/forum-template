@@ -13,14 +13,19 @@ import {
     DialogTitle,
     Tooltip,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCounter, updateCounter } from "../features/user/userSlice";
 
 const DeleteReplyIcon = ({ category, forum, parentId, id }) => {
     const [open, setOpen] = useState(false);
+
+    const dispatch = useDispatch();
     const handleYes = async () => {
         setOpen(false);
         await deleteDoc(
             doc(db, `forums/${category}/${forum}/${parentId}/replies/`, id)
         );
+        dispatch(updateCounter());
     };
     const handleClickOpen = () => {
         setOpen(true);

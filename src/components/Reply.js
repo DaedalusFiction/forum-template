@@ -18,8 +18,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import FlagAsInappropriateIcon from "../components/FlagAsInappropriateIcon";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import { useSelector } from "react-redux";
-import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    selectGoogleUser,
+    selectSiteUser,
+    updateCounter,
+} from "../features/user/userSlice";
 import { doc, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
@@ -32,6 +36,7 @@ const Reply = ({ reply }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [body, setBody] = useState("");
     const [error, setError] = useState("");
+    const dispatch = useDispatch();
 
     const handleBodyChange = (e) => {
         if (e.target.value.length > 5000) {
@@ -59,6 +64,7 @@ const Reply = ({ reply }) => {
             lastUpdated: Date.now(),
         });
         setIsEditing(false);
+        dispatch(updateCounter());
     };
 
     return (

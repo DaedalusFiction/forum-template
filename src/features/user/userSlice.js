@@ -4,6 +4,7 @@ import { fetchCount } from "../counter/counterAPI";
 const initialState = {
     googleUser: null,
     siteUser: null,
+    //counter property exists so that useGetPosts and useGetReplies hooks will re-get data after user makes new post or reply. It doesn't display anywhere.
     counter: 0,
 };
 
