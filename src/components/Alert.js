@@ -4,11 +4,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { deleteDoc, doc } from "firebase/firestore";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { selectGoogleUser } from "../features/user/userSlice";
-import { db } from "../firebase";
 
 export default function Alert({ handleYes, text, open, setOpen }) {
     const handleClickOpen = () => {

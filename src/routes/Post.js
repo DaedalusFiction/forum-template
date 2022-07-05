@@ -71,10 +71,6 @@ const Post = () => {
         dispatch(updateCounter());
     };
 
-    const handleDeleteIconClick = () => {
-        console.log("test");
-    };
-
     const handleCloseEdit = () => {
         setIsEditing(false);
     };

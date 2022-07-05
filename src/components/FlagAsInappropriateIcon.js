@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import FlagIcon from "@mui/icons-material/Flag";
-import { addDoc, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import {
     Box,

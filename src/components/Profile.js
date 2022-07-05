@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { collection, addDoc, doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
 import {
@@ -18,12 +18,7 @@ import {
     Tooltip,
     Typography,
 } from "@mui/material";
-import {
-    getAuth,
-    GoogleAuthProvider,
-    onAuthStateChanged,
-    signInWithPopup,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { auth, db, provider } from "../firebase";
 
 const Profile = () => {
@@ -78,11 +73,8 @@ const Profile = () => {
             case "Log In":
                 signInWithPopup(auth, provider)
                     .then(async (result) => {
-                        console.log("testing!");
                         // This gives you a Google Access Token. You can use it to access the Google API.
-                        const credential =
-                            GoogleAuthProvider.credentialFromResult(result);
-                        const token = credential.accessToken;
+
                         const googleUser = {
                             uid: result.user.uid,
                             email: result.user.email,
@@ -113,14 +105,8 @@ const Profile = () => {
                     })
                     .catch((error) => {
                         // Handle Errors here.
-                        const errorCode = error.code;
                         const errorMessage = error.message;
                         console.log(errorMessage);
-                        // The email of the user's account used.
-                        // The AuthCredential type that was used.
-                        const credential =
-                            GoogleAuthProvider.credentialFromError(error);
-                        // ...
                     });
                 setAnchorElUser(null);
                 break;

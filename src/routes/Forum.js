@@ -1,5 +1,4 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PostPreview from "../components/PostPreview";
 import useGetPosts from "../hooks/useGetPosts";

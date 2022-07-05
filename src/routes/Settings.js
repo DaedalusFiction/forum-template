@@ -1,24 +1,8 @@
 import React, { useState } from "react";
-import {
-    Avatar,
-    Container,
-    Box,
-    Button,
-    IconButton,
-    Menu,
-    MenuItem,
-    Tooltip,
-    Typography,
-    TextField,
-    Divider,
-    Grid,
-} from "@mui/material";
+import { Container, Box, Typography, Divider, Grid } from "@mui/material";
 
-import Notification from "../components/Notification";
 import UpdateUsernameBox from "../components/UpdateUsernameBox";
 import Alert from "../components/Alert";
-import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 import LoginButton from "../components/LoginButton";

@@ -4,16 +4,7 @@ import {
     collection,
     addDoc,
     doc,
-    collectionGroup,
-    query,
-    orderBy,
-    limit,
-    getDocs,
-    getDoc,
-    where,
-    startAfter,
     updateDoc,
-    FieldValue,
     increment,
 } from "firebase/firestore";
 
@@ -26,12 +17,7 @@ import {
     TextareaAutosize,
     Typography,
 } from "@mui/material";
-import ReplyIcon from "@mui/icons-material/Reply";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FlagIcon from "@mui/icons-material/Flag";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import {
-    selectCounter,
     selectGoogleUser,
     selectSiteUser,
     updateCounter,
@@ -49,11 +35,8 @@ const InputReply = () => {
     const siteUser = useSelector(selectSiteUser);
     const googleUser = useSelector(selectGoogleUser);
 
-    const counter = useSelector(selectCounter);
-
     const dispatch = useDispatch();
     const params = useParams();
-    const navigate = useNavigate();
 
     const handleBodyChange = (e) => {
         if (e.target.value.length > 5000) {

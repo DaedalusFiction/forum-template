@@ -3,21 +3,15 @@ import React, { useState } from "react";
 import {
     Box,
     Button,
-    Container,
     Divider,
     Grid,
     TextareaAutosize,
     Tooltip,
     Typography,
 } from "@mui/material";
-import ReplyIcon from "@mui/icons-material/Reply";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FlagIcon from "@mui/icons-material/Flag";
 import EditIcon from "@mui/icons-material/Edit";
 
 import FlagAsInappropriateIcon from "../components/FlagAsInappropriateIcon";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import { useDispatch, useSelector } from "react-redux";
 import {
     selectGoogleUser,
@@ -35,7 +29,6 @@ const Reply = ({ reply }) => {
     const googleUser = useSelector(selectGoogleUser);
     const [isEditing, setIsEditing] = useState(false);
     const [body, setBody] = useState("");
-    const [error, setError] = useState("");
     const dispatch = useDispatch();
 
     const handleBodyChange = (e) => {
@@ -96,7 +89,6 @@ const Reply = ({ reply }) => {
                                     justifyContent: "space-between",
                                 }}
                             >
-                                <Typography>{error}</Typography>
                                 <Typography
                                     sx={{
                                         color: "var(--fc-primary-muted)",

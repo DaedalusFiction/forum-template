@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+
 import Layout from "./routes/Layout";
 import Home from "./routes/Home";
 import Nopage from "./routes/Nopage";
@@ -19,7 +20,7 @@ const theme = createTheme({
             default: "rgb(245, 245, 245)",
         },
         primary: {
-            main: "#2F9C95",
+            main: "#004b46",
         },
         secondary: {
             main: "#C42021",

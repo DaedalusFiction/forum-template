@@ -13,8 +13,8 @@ import {
     DialogTitle,
     Tooltip,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCounter, updateCounter } from "../features/user/userSlice";
+import { useDispatch } from "react-redux";
+import { updateCounter } from "../features/user/userSlice";
 
 const DeleteReplyIcon = ({ category, forum, parentId, id }) => {
     const [open, setOpen] = useState(false);

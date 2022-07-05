@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Breadcrumb from "../components/Breadcrumb";
 import { Link, useParams } from "react-router-dom";
 import forumData from "../config/forumData.json";
@@ -9,9 +9,6 @@ const Category = () => {
     const myCategory = forumData.categories.filter(
         (category) => category.name === params.category
     );
-    const handleTest = () => {
-        console.log(myCategory);
-    };
     return (
         <Container>
             <Breadcrumb />

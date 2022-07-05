@@ -19,7 +19,6 @@ const Admin = () => {
     const handleDelete = async (location, isReply, id) => {
         if (isReply) {
             const myPath = `${location}/replies`;
-            console.log(myPath, id);
 
             await Promise.all([
                 deleteDoc(doc(db, myPath, id)),
@@ -29,11 +28,11 @@ const Admin = () => {
             let myPath = location.split("/");
             myPath = myPath.splice(0, myPath.length - 1);
             myPath = myPath.join("/");
-            console.log(myPath, id);
             await Promise.all([
                 updateDoc(doc(db, myPath, id), {
                     isEditable: false,
                     body: "[Post removed by moderator]",
+                    topic: "[Post removed by moderator]",
                 }),
                 deleteDoc(doc(db, "flaggedPosts", id)),
             ]);

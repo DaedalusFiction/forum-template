@@ -1,18 +1,6 @@
 import React, { useState } from "react";
 
-import {
-    collection,
-    addDoc,
-    doc,
-    collectionGroup,
-    query,
-    orderBy,
-    limit,
-    getDocs,
-    getDoc,
-    where,
-    startAfter,
-} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -24,10 +12,6 @@ import {
     TextareaAutosize,
     Typography,
 } from "@mui/material";
-import ReplyIcon from "@mui/icons-material/Reply";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FlagIcon from "@mui/icons-material/Flag";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import { selectGoogleUser, selectSiteUser } from "../features/user/userSlice";
 
 import { useSelector } from "react-redux";
@@ -45,9 +29,15 @@ const CreatePost = () => {
     const navigate = useNavigate();
 
     const handleBodyChange = (e) => {
+        if (e.target.value.length > 5000) {
+            return;
+        }
         setBody(e.target.value);
     };
     const handleTopicChange = (e) => {
+        if (e.target.value.length > 50) {
+            return;
+        }
         setTopic(e.target.value);
     };
 
