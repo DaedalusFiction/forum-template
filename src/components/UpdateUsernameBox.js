@@ -30,8 +30,12 @@ const Settings = () => {
 
     const dispatch = useDispatch();
     const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
-        setUsernameError("");
+        if (e.target.value.length > 12) {
+            setUsernameError("Username must be between 8-12 characters");
+        } else {
+            setUsername(e.target.value);
+            setUsernameError("");
+        }
     };
     const verifyUsername = async (e) => {
         if (!isUpdating) {
