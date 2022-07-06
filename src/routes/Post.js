@@ -63,12 +63,13 @@ const Post = () => {
             db,
             `forums/${params.category}/${params.forum}/${params.id}`
         );
-        const updateTask = await updateDoc(docRef, {
+        await updateDoc(docRef, {
             body: body,
             lastUpdated: Date.now(),
+        }).then(() => {
+            setIsEditing(false);
+            dispatch(updateCounter());
         });
-        setIsEditing(false);
-        dispatch(updateCounter());
     };
 
     const handleCloseEdit = () => {

@@ -1,14 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-    collection,
-    collectionGroup,
-    query,
-    orderBy,
-    limit,
-    getDocs,
-    where,
-    startAfter,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
 function useGetFlaggedPosts(counter) {

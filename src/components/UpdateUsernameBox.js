@@ -59,7 +59,7 @@ const Settings = () => {
             return;
         }
         const userRef = doc(db, "users", googleUser.uid);
-        const uploadTaskTwo = await updateDoc(userRef, {
+        await updateDoc(userRef, {
             username: username,
         });
         let newSiteUser = JSON.parse(JSON.stringify(siteUser));

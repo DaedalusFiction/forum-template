@@ -52,12 +52,13 @@ const Reply = ({ reply }) => {
             db,
             `forums/${params.category}/${params.forum}/${params.id}/replies/${reply.id}`
         );
-        const updateTask = await updateDoc(docRef, {
+        await updateDoc(docRef, {
             body: body,
             lastUpdated: Date.now(),
+        }).then(() => {
+            setIsEditing(false);
+            dispatch(updateCounter());
         });
-        setIsEditing(false);
-        dispatch(updateCounter());
     };
 
     return (

@@ -1,4 +1,4 @@
-import { Box, Grid, Tooltip, Typography } from "@mui/material";
+import { Grid, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 

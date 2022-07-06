@@ -8,7 +8,7 @@ import {
     increment,
 } from "firebase/firestore";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
     Box,
     Button,
