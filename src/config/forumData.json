@@ -7,7 +7,7 @@
         },
         {
             "name": "off-topic",
-            "description": "General Discussion",
+            "description": "Category Description",
             "subcategories": ["first", "second", "third"]
         },
         {
@@ -23,17 +23,17 @@
         },
         {
             "name": "news",
-            "description": "General Discussion",
+            "description": "Category Description",
             "subcategories": ["first", "second", "third", "fourth", "fifth"]
         },
         {
             "name": "suggestions",
-            "description": "General Discussion",
+            "description": "Category Description",
             "subcategories": ["first", "second"]
         },
         {
             "name": "questions",
-            "description": "General Discussion",
+            "description": "Category Description",
             "subcategories": ["first", "second", "third"]
         }
     ]

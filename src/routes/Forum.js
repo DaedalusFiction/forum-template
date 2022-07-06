@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import PostPreview from "../components/PostPreview";
 import useGetPosts from "../hooks/useGetPosts";
@@ -47,28 +47,27 @@ const Forum = () => {
                     </Link>
                 </Box>
                 {posts && posts.length > 0 && (
-                    <Box
+                    <Grid
+                        container
                         sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            marginBottom: ".5em",
-                            padding: "0 1em",
+                            padding: ".75em 1em",
                         }}
                     >
-                        <Typography
-                            sx={{
-                                fontSize: "1rem",
-                                color: "var(--fc-primary-muted)",
-                            }}
-                        >
-                            Topic
-                        </Typography>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                width: "10rem",
-                            }}
+                        <Grid item xs={6} md={9}>
+                            <Typography
+                                sx={{
+                                    fontSize: "1rem",
+                                    color: "var(--fc-primary-muted)",
+                                }}
+                            >
+                                Topic
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={6}
+                            md={1}
+                            sx={{ display: "flex", justifyContent: "end" }}
                         >
                             <Typography
                                 sx={{
@@ -78,6 +77,16 @@ const Forum = () => {
                             >
                                 Author
                             </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={0}
+                            md={1}
+                            sx={{
+                                display: { xs: "none", md: "flex" },
+                                justifyContent: "end",
+                            }}
+                        >
                             <Typography
                                 sx={{
                                     fontSize: "1rem",
@@ -86,8 +95,26 @@ const Forum = () => {
                             >
                                 Replies
                             </Typography>
-                        </Box>
-                    </Box>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={0}
+                            md={1}
+                            sx={{
+                                display: { xs: "none", md: "flex" },
+                                justifyContent: "end",
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontSize: "1rem",
+                                    color: "var(--fc-primary-muted)",
+                                }}
+                            >
+                                Activity
+                            </Typography>
+                        </Grid>
+                    </Grid>
                 )}
                 {posts &&
                     posts.map((post, index) => {

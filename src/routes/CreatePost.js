@@ -35,7 +35,7 @@ const CreatePost = () => {
         setBody(e.target.value);
     };
     const handleTopicChange = (e) => {
-        if (e.target.value.length > 50) {
+        if (e.target.value.length > 100) {
             return;
         }
         setTopic(e.target.value);
@@ -89,6 +89,7 @@ const CreatePost = () => {
                             <Grid item xs={12} sm={10}>
                                 <TextareaAutosize
                                     onChange={handleTopicChange}
+                                    value={topic}
                                     aria-label="topic-post"
                                     rows={1}
                                     placeholder="Enter a Title..."
@@ -96,6 +97,7 @@ const CreatePost = () => {
                                 />
                                 <TextareaAutosize
                                     onChange={handleBodyChange}
+                                    value={body}
                                     aria-label="body-reply"
                                     minRows={6}
                                     placeholder="Write something pleasant..."

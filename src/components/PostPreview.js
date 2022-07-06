@@ -1,10 +1,10 @@
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Box, Grid, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
 const PostPreview = ({ post }) => {
     const params = useParams();
-    const { topic, authorUsername, body, replies } = post.data();
+    const { topic, authorUsername, body, replies, latestReply } = post.data();
     const postLocation =
         "/forums/" + params.category + "/" + params.forum + "/" + post.id;
 
@@ -16,11 +16,9 @@ const PostPreview = ({ post }) => {
             followCursor
         >
             <Link to={postLocation}>
-                <Box
+                <Grid
+                    container
                     sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
                         padding: ".75em 1em",
                         borderTop: "1px solid var(--border-light)",
                         background: "var(--bg-light)",
@@ -29,18 +27,72 @@ const PostPreview = ({ post }) => {
                         },
                     }}
                 >
-                    <Typography variant="h5">{topic}</Typography>
-                    <Box
+                    <Grid item xs={6} md={9}>
+                        <Typography
+                            sx={{
+                                fontSize: "1rem",
+                                color: "var(--fc-primary-muted)",
+                            }}
+                        >
+                            {topic.length > 50
+                                ? topic.slice(0, 50) + "..."
+                                : topic}
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        xs={6}
+                        md={1}
+                        sx={{ display: "flex", justifyContent: "end" }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: "1rem",
+                                color: "var(--fc-primary-muted)",
+                            }}
+                        >
+                            {authorUsername}
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        xs={0}
+                        md={1}
                         sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            width: "10rem",
+                            display: { xs: "none", md: "flex" },
+                            justifyContent: "end",
                         }}
                     >
-                        <Typography>{authorUsername}</Typography>
-                        <Typography>{replies}</Typography>
-                    </Box>
-                </Box>
+                        <Typography
+                            sx={{
+                                fontSize: "1rem",
+                                color: "var(--fc-primary-muted)",
+                            }}
+                        >
+                            {replies}
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        xs={0}
+                        md={1}
+                        sx={{
+                            display: { xs: "none", md: "flex" },
+                            justifyContent: "end",
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: "1rem",
+                                color: "var(--fc-primary-muted)",
+                            }}
+                        >
+                            {Math.round(
+                                (Date.now() - latestReply) / 1000 / 60 / 60
+                            ) + "h"}
+                        </Typography>
+                    </Grid>
+                </Grid>
             </Link>
         </Tooltip>
     );

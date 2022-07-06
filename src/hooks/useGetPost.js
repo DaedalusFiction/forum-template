@@ -1,16 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-    collection,
-    doc,
-    collectionGroup,
-    query,
-    orderBy,
-    limit,
-    getDocs,
-    getDoc,
-    where,
-    startAfter,
-} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 function useGetPost(category, forum, id, counter) {
