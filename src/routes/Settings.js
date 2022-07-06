@@ -68,23 +68,25 @@ const Settings = () => {
                         xs={6}
                         sx={{ display: "flex", justifyContent: "end" }}
                     >
-                        <UpdateUsernameBox />
+                        {siteUser && <UpdateUsernameBox />}
                     </Grid>
                 </Grid>
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        margin: ".5em 0",
-                    }}
-                >
-                    <Alert
-                        text="Delete Account"
-                        handleYes={handleYes}
-                        open={deleteAlertOpen}
-                        setOpen={setDeleteAlertOpen}
-                    />
-                </Box>
+                {siteUser && (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            margin: ".5em 0",
+                        }}
+                    >
+                        <Alert
+                            text="Delete Account"
+                            handleYes={handleYes}
+                            open={deleteAlertOpen}
+                            setOpen={setDeleteAlertOpen}
+                        />
+                    </Box>
+                )}
             </Container>
         </Container>
     );

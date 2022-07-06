@@ -11,7 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 import Profile from "../components/Profile.js";
 import { useState } from "react";
 
-const pages = ["forums", "admin"];
+const pages = ["forums"];
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -87,7 +87,10 @@ const Header = () => {
                                     <Link to={page.toLowerCase()}>
                                         <Typography
                                             textAlign="center"
-                                            sx={{ color: "var(--fc-primary)" }}
+                                            sx={{
+                                                color: "var(--fc-primary)",
+                                                textTransform: "capitalize",
+                                            }}
                                         >
                                             {page}
                                         </Typography>

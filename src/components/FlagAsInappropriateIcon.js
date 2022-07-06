@@ -58,7 +58,7 @@ const FlagAsInappropriateIcon = ({ forum, id, body, flaggedBy, isReply }) => {
                 aria-describedby="flag-post-description"
             >
                 <DialogTitle id="flag-post">
-                    {"flag this post as inappropriate?"}
+                    {"Flag this post as inappropriate?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="flag-post-description">

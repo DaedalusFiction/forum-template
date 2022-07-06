@@ -47,7 +47,7 @@ const LoginButton = () => {
                 // The AuthCredential type that was used.
             });
     };
-    return <Button onClick={handleLogin}>Login</Button>;
+    return <Button onClick={handleLogin}>Log in with Google</Button>;
 };
 
 export default LoginButton;

@@ -43,16 +43,22 @@ const Admin = () => {
     return (
         <Container maxWidth="lg">
             <Typography variant="h1">Admin</Typography>
-            <Typography
-                variant="h5"
-                sx={{
-                    fontSize: "1.25rem",
-                    marginTop: "2rem",
-                    fontWeight: "bold",
-                }}
-            >
-                Flagged Posts
-            </Typography>
+            {siteUser && siteUser.admin === true ? (
+                <Typography
+                    variant="h5"
+                    sx={{
+                        fontSize: "1.25rem",
+                        marginTop: "2rem",
+                        fontWeight: "bold",
+                    }}
+                >
+                    Flagged Posts
+                </Typography>
+            ) : (
+                <Typography>
+                    You do not have administrative privileges
+                </Typography>
+            )}
             <Divider />
             {siteUser &&
                 siteUser.admin === true &&

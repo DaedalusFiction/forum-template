@@ -68,9 +68,11 @@ const Profile = () => {
         switch (e.target.innerHTML) {
             case "Settings":
                 setAnchorElUser(null);
-
                 break;
-            case "Log In":
+            case "Admin":
+                setAnchorElUser(null);
+                break;
+            case "Log in with Google":
                 signInWithPopup(auth, provider)
                     .then(async (result) => {
                         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -149,7 +151,9 @@ const Profile = () => {
             >
                 {!googleUser && (
                     <MenuItem onClick={handleMenuClick}>
-                        <Typography textAlign="center">Log In</Typography>
+                        <Typography textAlign="center">
+                            Log in with Google
+                        </Typography>
                     </MenuItem>
                 )}
                 {googleUser && (
@@ -160,6 +164,18 @@ const Profile = () => {
                                 sx={{ color: "var(--fc-primary)" }}
                             >
                                 Settings
+                            </Typography>
+                        </MenuItem>
+                    </Link>
+                )}
+                {googleUser && siteUser && siteUser.admin && (
+                    <Link to="admin" onClick={handleMenuClick}>
+                        <MenuItem>
+                            <Typography
+                                textAlign="center"
+                                sx={{ color: "var(--fc-primary)" }}
+                            >
+                                Admin
                             </Typography>
                         </MenuItem>
                     </Link>
