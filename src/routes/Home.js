@@ -1,9 +1,12 @@
-import { Box, Button, Container, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button, Container, Grow, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 
 const Home = () => {
     const navigate = useNavigate();
+    const [isHoveringForum, setIsHoveringForum] = useState(false);
+    const [isHoveringGithub, setIsHoveringGithub] = useState(false);
     const handleClick = () => {
         navigate("/forums");
     };
@@ -24,8 +27,46 @@ const Home = () => {
                     one built for you, please contact Dave at
                     djs41286@gmail.com.
                 </Typography>
-                <Button variant="contained" size="large" onClick={handleClick}>
+                <Button
+                    variant="contained"
+                    size="large"
+                    onClick={handleClick}
+                    onMouseEnter={() => {
+                        setIsHoveringForum(true);
+                    }}
+                    onMouseLeave={() => {
+                        setIsHoveringForum(false);
+                    }}
+                    endIcon={
+                        isHoveringForum && (
+                            <Grow in={isHoveringForum} timeout={350}>
+                                <ArrowForwardIos />
+                            </Grow>
+                        )
+                    }
+                >
                     Visit forums
+                </Button>
+                <Button
+                    variant="contained"
+                    size="large"
+                    sx={{ marginLeft: "1em" }}
+                    href="https://github.com/DaedalusFiction/forum-template"
+                    onMouseEnter={() => {
+                        setIsHoveringGithub(true);
+                    }}
+                    onMouseLeave={() => {
+                        setIsHoveringGithub(false);
+                    }}
+                    endIcon={
+                        isHoveringGithub && (
+                            <Grow in={isHoveringGithub} timeout={350}>
+                                <ArrowForwardIos />
+                            </Grow>
+                        )
+                    }
+                >
+                    Visit Github
                 </Button>
             </Box>
         </Container>

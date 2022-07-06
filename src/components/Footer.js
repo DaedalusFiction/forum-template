@@ -53,7 +53,9 @@ const Footer = () => {
                                         sx={{
                                             color: "white",
                                             fontSize: "1rem",
-                                            "&:hover": { color: "white" },
+                                            "&:hover": {
+                                                color: "var(--fc-secondary-muted)",
+                                            },
                                         }}
                                         gutterBottom
                                     >
@@ -63,7 +65,15 @@ const Footer = () => {
                             );
                         })}
                     </Box>
-                    <Button onClick={navigateToTop} sx={{ color: "white" }}>
+                    <Button
+                        onClick={navigateToTop}
+                        sx={{
+                            color: "white",
+                            "&:hover": {
+                                color: "var(--fc-secondary-muted)",
+                            },
+                        }}
+                    >
                         Back to Top
                     </Button>
                 </Box>

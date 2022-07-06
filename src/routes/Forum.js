@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Grow, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import PostPreview from "../components/PostPreview";
 import useGetPosts from "../hooks/useGetPosts";
@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 import Breadcrumb from "../components/Breadcrumb";
 import { useSelector } from "react-redux";
 import { selectCounter } from "../features/user/userSlice";
+import { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
 
 const Forum = () => {
     const params = useParams();
+    const [isHovering, setIsHovering] = useState(false);
 
     const counter = useSelector(selectCounter);
     const [posts] = useGetPosts(
@@ -41,7 +44,23 @@ const Forum = () => {
                     <Link
                         to={`/create-post/${params.category}/${params.forum}`}
                     >
-                        <Button color="secondary" variant="contained">
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            onMouseEnter={() => {
+                                setIsHovering(true);
+                            }}
+                            onMouseLeave={() => {
+                                setIsHovering(false);
+                            }}
+                            endIcon={
+                                isHovering && (
+                                    <Grow in={isHovering} timeout={350}>
+                                        <AddIcon />
+                                    </Grow>
+                                )
+                            }
+                        >
                             Create Post
                         </Button>
                     </Link>
