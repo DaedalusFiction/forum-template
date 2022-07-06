@@ -1,5 +1,5 @@
 import { Box, Button, Container, Divider, Typography } from "@mui/material";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,12 +17,21 @@ const Admin = () => {
     const [posts] = useGetFlaggedPosts(counter);
 
     const handleDelete = async (location, isReply, id) => {
+        console.log(location);
+
         if (isReply) {
             const myPath = `${location}/replies`;
-
+            const parentArray = location.split("/");
+            const parentId = parentArray[parentArray.length - 1];
+            const parentLocation = parentArray
+                .splice(0, parentArray.length - 1)
+                .join("/");
             await Promise.all([
                 deleteDoc(doc(db, myPath, id)),
                 deleteDoc(doc(db, "flaggedPosts", id)),
+                updateDoc(doc(db, parentLocation, parentId), {
+                    replies: increment(-1),
+                }),
             ]);
         } else {
             let myPath = location.split("/");

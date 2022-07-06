@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import {
     Box,
@@ -25,6 +25,9 @@ const DeleteReplyIcon = ({ category, forum, parentId, id }) => {
         await deleteDoc(
             doc(db, `forums/${category}/${forum}/${parentId}/replies/`, id)
         );
+        await updateDoc(doc(db, `forums/${category}/${forum}`, parentId), {
+            replies: increment(-1),
+        });
         dispatch(updateCounter());
     };
     const handleClickOpen = () => {
