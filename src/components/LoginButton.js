@@ -30,12 +30,13 @@ const LoginButton = () => {
                         avatar: "rocket",
                         lastPosted: Date.now(),
                     };
-                    const docRef = await setDoc(
+                    await setDoc(
                         doc(db, "users", googleUser.uid),
                         siteUser
-                    );
-                    dispatch(updateGoogleUser(googleUser));
-                    dispatch(updateSiteUser(siteUser));
+                    ).then(() => {
+                        dispatch(updateGoogleUser(googleUser));
+                        dispatch(updateSiteUser(siteUser));
+                    });
                 }
                 // ...
             })

@@ -63,6 +63,7 @@ const CreatePost = () => {
                 replies: 0,
                 createdAt: Date.now(),
                 lastUpdated: Date.now(),
+                latestReply: Date.now(),
                 isEditable: true,
             });
 

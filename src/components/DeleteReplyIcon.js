@@ -22,13 +22,16 @@ const DeleteReplyIcon = ({ category, forum, parentId, id }) => {
     const dispatch = useDispatch();
     const handleYes = async () => {
         setOpen(false);
-        await deleteDoc(
-            doc(db, `forums/${category}/${forum}/${parentId}/replies/`, id)
-        );
-        await updateDoc(doc(db, `forums/${category}/${forum}`, parentId), {
-            replies: increment(-1),
+        await Promise.all([
+            deleteDoc(
+                doc(db, `forums/${category}/${forum}/${parentId}/replies/`, id)
+            ),
+            updateDoc(doc(db, `forums/${category}/${forum}`, parentId), {
+                replies: increment(-1),
+            }),
+        ]).then(() => {
+            dispatch(updateCounter());
         });
-        dispatch(updateCounter());
     };
     const handleClickOpen = () => {
         setOpen(true);

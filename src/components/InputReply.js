@@ -47,10 +47,6 @@ const InputReply = () => {
 
     const handleCreateReply = async (e) => {
         e.preventDefault();
-        const collectionRef = collection(
-            db,
-            `forums/${params.category}/${params.forum}/${params.id}/replies`
-        );
 
         //make sure user can't post more than once every fifteen seconds
         const currentTime = Date.now();
@@ -60,34 +56,44 @@ const InputReply = () => {
             );
             return;
         }
+
         if (body !== "") {
-            const uploadTask = await addDoc(collectionRef, {
-                authorUsername: siteUser.username,
-                authorUID: googleUser.uid,
-                body: body,
-                createdAt: currentTime,
-                lastUpdated: Date.now(),
-                isEditable: true,
-            });
+            const collectionRef = collection(
+                db,
+                `forums/${params.category}/${params.forum}/${params.id}/replies`
+            );
             const parentPostRef = doc(
                 db,
                 `forums/${params.category}/${params.forum}`,
                 params.id
             );
-            const updateParemtPostTask = await updateDoc(parentPostRef, {
-                replies: increment(1),
-            });
             const userRef = doc(db, "users", googleUser.uid);
-            const uploadTaskTwo = await updateDoc(userRef, {
-                lastPosted: currentTime,
-            });
             let newSiteUser = JSON.parse(JSON.stringify(siteUser));
             newSiteUser.lastPosted = currentTime;
-            dispatch(updateSiteUser(newSiteUser));
-            dispatch(updateCounter());
-            setBody("");
-            setOpen(true);
-            setError("");
+
+            await Promise.all([
+                addDoc(collectionRef, {
+                    authorUsername: siteUser.username,
+                    authorUID: googleUser.uid,
+                    body: body,
+                    createdAt: currentTime,
+                    lastUpdated: Date.now(),
+                    isEditable: true,
+                }),
+                updateDoc(parentPostRef, {
+                    replies: increment(1),
+                    latestReply: Date.now(),
+                }),
+                updateDoc(userRef, {
+                    lastPosted: currentTime,
+                }),
+            ]).then(() => {
+                dispatch(updateSiteUser(newSiteUser));
+                dispatch(updateCounter());
+                setBody("");
+                setOpen(true);
+                setError("");
+            });
         }
     };
     return (

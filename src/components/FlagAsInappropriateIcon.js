@@ -33,10 +33,7 @@ const FlagAsInappropriateIcon = ({ forum, id, body, flaggedBy, isReply }) => {
             location: `forums/` + Object.values(params).join("/"),
             isReply: isReply,
         };
-        const docRef = await setDoc(
-            doc(db, "flaggedPosts", id),
-            inappropriatePost
-        );
+        await setDoc(doc(db, "flaggedPosts", id), inappropriatePost);
     };
 
     const handleNo = () => {

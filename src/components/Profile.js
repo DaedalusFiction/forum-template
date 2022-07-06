@@ -96,12 +96,13 @@ const Profile = () => {
                                 lastPosted: Date.now(),
                                 admin: false,
                             };
-                            const docRef = await setDoc(
+                            await setDoc(
                                 doc(db, "users", googleUser.uid),
                                 siteUser
-                            );
-                            dispatch(updateGoogleUser(googleUser));
-                            dispatch(updateSiteUser(siteUser));
+                            ).then(() => {
+                                dispatch(updateGoogleUser(googleUser));
+                                dispatch(updateSiteUser(siteUser));
+                            });
                         }
                         // ...
                     })
@@ -113,9 +114,11 @@ const Profile = () => {
                 setAnchorElUser(null);
                 break;
             case "Log Out":
-                auth.signOut().then(dispatch(updateGoogleUser(null)));
-                dispatch(updateSiteUser(null));
-                setAnchorElUser(null);
+                auth.signOut().then(() => {
+                    dispatch(updateGoogleUser(null));
+                    dispatch(updateSiteUser(null));
+                    setAnchorElUser(null);
+                });
                 break;
             default:
                 return;

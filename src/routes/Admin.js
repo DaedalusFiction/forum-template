@@ -17,8 +17,6 @@ const Admin = () => {
     const [posts] = useGetFlaggedPosts(counter);
 
     const handleDelete = async (location, isReply, id) => {
-        console.log(location);
-
         if (isReply) {
             const myPath = `${location}/replies`;
             const parentArray = location.split("/");
