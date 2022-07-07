@@ -11,15 +11,9 @@
             "subcategories": ["first", "second", "third"]
         },
         {
-            "name": "Emma's Place",
-            "description": "Emma's Forums",
-            "subcategories": [
-                "Horses!",
-                "Recipes",
-                "Skin Care Products",
-                "Early Childhood Development",
-                "Interior Decorating for the Hippie-adjacent"
-            ]
+            "name": "Dancing",
+            "description": "Your spot for all things dance-related",
+            "subcategories": ["swing", "salsa", "balboa", "kizomba", "tango"]
         },
         {
             "name": "news",
